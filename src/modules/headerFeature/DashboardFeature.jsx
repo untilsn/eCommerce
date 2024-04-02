@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { dashboardLink } from "./DashboardLink";
 import BrowserCategories from "./BrowserCategories";
 import { Link, NavLink, useLocation } from "react-router-dom";
+import MenuShop from "../menu/MenuShop";
 
 const DashboardFeature = () => {
   const location = useLocation();
+  const [itemHover, setItemHover] = useState("");
+  const handleMenuHover = (item) => {
+    setItemHover(item.name);
+  };
+  const handleMenuClose = () => {
+    setItemHover("");
+  };
   return (
     <div className="sticky top-0 z-30 bg-white shadow-primaryShadow">
       <div className="container grid items-center justify-between grid-cols-4">
@@ -14,9 +22,11 @@ const DashboardFeature = () => {
         <div className="flex items-center col-span-2 px-4 capitalize ">
           {dashboardLink.map((item) => (
             <Link
+              onMouseEnter={() => handleMenuHover(item)}
+              onMouseLeave={() => handleMenuClose(item)}
               to={item.url}
               key={item.name}
-              className="relative px-4 py-3 mx-auto text-black group"
+              className="relative w-full px-4 py-5 mx-auto text-black group"
             >
               {location.pathname === item.url ? (
                 <div className="flex items-center gap-2">
@@ -62,6 +72,7 @@ const DashboardFeature = () => {
                   <span className="absolute bottom-0 right-0 w-0 h-[2px] transition-all duration-300 group-hover:w-full bg-yellow"></span>
                 </div>
               )}
+              {itemHover === item.name ? item.menu : ""}
             </Link>
           ))}
         </div>

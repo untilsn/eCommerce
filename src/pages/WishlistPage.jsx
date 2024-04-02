@@ -20,6 +20,7 @@ const TABLE_ROWS = [
     name: "Laurent Perrier",
     price: "Executive",
     date: "19/09/17",
+    img: "/public/item/shopitem.jpg",
   },
   {
     name: "Michael Levi",

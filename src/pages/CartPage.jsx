@@ -4,6 +4,7 @@ import Breadcrumb from "../components/breadcrumb/Breadcrumb";
 import Table from "../components/table/Table";
 import CardTotal from "../components/card/CardTotal";
 import { FaArrowRightLong } from "react-icons/fa6";
+import MenuShop from "../modules/menu/MenuShop";
 
 const CartPage = () => {
   return (

@@ -3,14 +3,14 @@ import React from "react";
 const SearchInput = () => {
   return (
     <div className="flex items-center w-full col-span-2 bg-light rounded-3xl ">
-      <span className="px-2">
+      <span className="px-5">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-9 h-9 "
+          className="rotate-90 w-7 h-7 "
         >
           <path
             strokeLinecap="round"
