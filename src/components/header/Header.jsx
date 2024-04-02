@@ -8,12 +8,11 @@ import { Outlet } from "react-router-dom";
 
 const Header = () => {
   return (
-    <div className="w-full bg-[#212529] bg-opacity-95">
+    <div className="w-full bg-[#212529] bg-opacity-95 ">
       <div className="container">
         <TopHeader></TopHeader>
         <HeaderBottom></HeaderBottom>
       </div>
-      <DashboardFeature></DashboardFeature>
       <Outlet></Outlet>
     </div>
   );

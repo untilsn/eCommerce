@@ -1,5 +1,9 @@
 import React from "react";
 import { v4 } from "uuid";
+import { FaCartPlus } from "react-icons/fa";
+import { BiSolidBinoculars } from "react-icons/bi";
+import { FaRegHeart } from "react-icons/fa";
+
 export const ReviewIcon = () => {
   return (
     <svg
@@ -19,13 +23,32 @@ export const ReviewIcon = () => {
 
 const CardItem = () => {
   return (
-    <div className="max-w-[400px] w-full h-[500px] border border-gray border-opacity-15 bg-light">
-      <img
-        className="w-full h-[276px] object-cover"
-        src="/item/itemcard1.jpg"
-        alt=""
-      />
-      {/* content */}
+    <div className="z-0 group relative max-w-[400px] w-full h-[500px] border border-gray border-opacity-15 bg-light">
+      <div className="relative -z-20">
+        <img
+          className="w-full h-[276px] object-cover"
+          src="/item/itemcard1.jpg"
+          alt=""
+        />
+        {/* Heart icon */}
+        <div className="absolute p-3 rounded-full right-6 top-6 bg-yellow transition-all opacity-0 group-hover:opacity-90 -translate-x-[50%] group-hover:translate-x-[5%] ">
+          <FaRegHeart />
+        </div>
+        {/* Cart and Binoculars icons */}
+        <div
+          className="absolute z-0 bottom-0 left-0 right-0  text-xl flex items-center justify-evenly h-[50px] bg-darkPrimary text-light 
+          translate-y-[100%]  group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all"
+        >
+          <div>
+            <FaCartPlus className="hover:text-yellow" />
+          </div>
+          <hr className="h-[60%] w-[1px] bg-white" />
+          <div>
+            <BiSolidBinoculars className="hover:text-yellow" />
+          </div>
+        </div>
+      </div>
+      {/* Content */}
       <div className="flex flex-col gap-2 p-5 bg-light">
         <div className="capitalize text-gray">apple,watch</div>
         <h1 className="text-xl">
@@ -33,11 +56,11 @@ const CardItem = () => {
         </h1>
         <h2 className="text-xl text-yellow">$22.4</h2>
         <div className="flex items-center gap-5">
-          <div className="flex items-center gap-1 ">
+          <div className="flex items-center gap-1">
             {Array(5)
               .fill(0)
               .map((item) => (
-                <ReviewIcon key={v4()}></ReviewIcon>
+                <ReviewIcon key={v4()} />
               ))}
           </div>
           <span className="capitalize text-gray text-opacity-60">

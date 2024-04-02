@@ -1,19 +1,22 @@
+import MenuShop from "../menu/MenuShop";
+
 export const dashboardLink = [
   {
     name: "home",
-    url: "/home",
+    url: "/",
   },
   {
     name: "shop",
     url: "/shop",
+    menu: <MenuShop></MenuShop>,
   },
   {
     name: "product",
     url: "/product",
   },
   {
-    name: "page",
-    url: "/page",
+    name: "cart",
+    url: "/cart",
   },
   {
     name: "blogs",

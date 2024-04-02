@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import Banner from "../modules/homepage/Banner";
-import SubBanner from "../modules/homepage/SubBanner";
 import ShopReview from "../modules/shopReview/ShopReview";
 import PromoBanner from "../components/banner/PromoBanner";
 import DealOutlet from "../modules/homepage/DealOutlet";
@@ -8,7 +7,6 @@ import BrandBanner from "../modules/homepage/BrandBanner";
 import TrendProduct from "../modules/homepage/TrendProduct";
 import SupportServicesBanner from "../modules/homepage/SupportServicesBanner";
 import FooterBanner from "../modules/homepage/footer/FooterBanner";
-import FooterContact from "../modules/homepage/footer/FooterContact";
 
 const HomePage = () => {
   return (
@@ -26,7 +24,6 @@ const HomePage = () => {
         <TrendProduct></TrendProduct>
         <SupportServicesBanner></SupportServicesBanner>
         <FooterBanner></FooterBanner>
-        <FooterContact></FooterContact>
       </div>
     </Fragment>
   );

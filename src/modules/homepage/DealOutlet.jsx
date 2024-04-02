@@ -3,6 +3,7 @@ import dealBanner from "/code/eCommerce-redux/public/dealoutletbanner.jpg";
 import CardItem from "../../components/card/CardItem";
 import ButtonItem from "../../components/button/ButtonItem";
 import TitlePath from "../../components/title/TitlePath";
+import DisplayTime from "./DisplayTime";
 
 const DealOutlet = () => {
   return (
@@ -36,6 +37,9 @@ const DealOutlet = () => {
                 $310.00{" "}
                 <span className="text-gray text-opacity-60"> Was $190.00</span>
               </div>
+            </div>
+            <div>
+              <DisplayTime></DisplayTime>
             </div>
           </div>
         </div>

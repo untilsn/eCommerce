@@ -1,13 +1,13 @@
 import React from "react";
 
-const ButtonItem = ({ children, kind = "primary" }) => {
+const ButtonItem = ({ children, kind = "primary", className }) => {
   return (
     <button
       className={`${
         kind === "primary"
           ? "inline-flex items-center gap-3 px-5 py-4 text-lg rounded-full bg-yellow text-light"
           : "bg-transparent border border-gray  inline-flex items-center gap-3 px-5 py-4 text-lg rounded-full border-opacity-60 hover:bg-light hover:text-yellow"
-      }`}
+      } ${className} transition-all `}
     >
       {children}
       <span>
@@ -15,7 +15,7 @@ const ButtonItem = ({ children, kind = "primary" }) => {
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           fill="currentColor"
-          className="w-6 h-6"
+          className="w-6 h-6 "
         >
           <path
             fillRule="evenodd"

@@ -7,7 +7,7 @@ import { FaPinterest } from "react-icons/fa";
 export const FooterIconContact = [
   {
     id: 1,
-    icon: <FaFacebookF className="text-red" />,
+    icon: <FaFacebookF />,
     name: "icon-1",
   },
   {

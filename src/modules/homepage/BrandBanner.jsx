@@ -43,7 +43,7 @@ const BrandBanner = () => {
     <div className="w-full py-20 mb-16 bg-transparent border-b border-gray border-opacity-20">
       <div className="flex items-center justify-center w-full h-full gap-10">
         {brandIcon.map((item) => (
-          <div className="max-w-[140px] w-full h-[50px] ">
+          <div key={item.id} className="max-w-[140px] w-full h-[50px] ">
             <img
               style={{ objectPosition: "center top" }}
               className="object-contain w-full h-full"

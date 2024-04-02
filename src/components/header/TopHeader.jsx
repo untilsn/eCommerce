@@ -28,13 +28,13 @@ const TopHeader = () => {
         <span className="text-lg text-textColor">Call: +0123 456 789</span>
       </div>
       {/* signin */}
-      <a
+      <button
         onClick={handleOpenModal}
         href="#"
         className="text-lg hover:text-yellow text-textColor"
       >
         Sign in / Sign up
-      </a>
+      </button>
     </div>
   );
 };
