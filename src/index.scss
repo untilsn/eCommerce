@@ -65,3 +65,18 @@ textarea {
 .border-b_primary {
   @apply border-b border-gray border-opacity-20;
 }
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-opacity-25 bg-gray rounded-lg;
+}
+// swiper
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  padding: 16px;
+  color: #232324;
+  @apply text-2xl bg-transparent;
+}

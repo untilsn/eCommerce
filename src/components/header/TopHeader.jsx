@@ -1,11 +1,21 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { openModalAuth } from "../../redux/slice/authSlice";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../config/firebaseConfigure";
+import { Navigate } from "react-router-dom";
 const TopHeader = () => {
+  const [isLogin, setIsLogin] = useState("");
   const dispatch = useDispatch();
   const handleOpenModal = () => {
     dispatch(openModalAuth(true));
   };
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) setIsLogin(user.displayName);
+    });
+  }, []);
+
   return (
     <div className="flex items-center justify-between py-3 border-b border-gray">
       <div className="flex items-center gap-2">
@@ -28,13 +38,19 @@ const TopHeader = () => {
         <span className="text-lg text-textColor">Call: +0123 456 789</span>
       </div>
       {/* signin */}
-      <button
-        onClick={handleOpenModal}
-        href="#"
-        className="text-lg hover:text-yellow text-textColor"
-      >
-        Sign in / Sign up
-      </button>
+      {isLogin === "" || null ? (
+        <button
+          onClick={handleOpenModal}
+          href="#"
+          className="text-lg hover:text-yellow text-textColor"
+        >
+          Sign in / Sign up
+        </button>
+      ) : (
+        <div className="text-lg text-gray ">
+          welcome back <span className="text-white">{isLogin}</span>
+        </div>
+      )}
     </div>
   );
 };

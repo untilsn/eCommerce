@@ -1,6 +1,7 @@
 import MenuCart from "../menu/MenuCart";
 import MenuShop from "../menu/MenuShop";
 import ProductMenu from "../menu/ProductMenu";
+import ProfileMenu from "../menu/ProfileMenu";
 
 export const dashboardLink = [
   {
@@ -31,8 +32,8 @@ export const dashboardLink = [
     hover: false,
   },
   {
-    name: "element",
-    url: "/element",
+    name: "profile",
     hover: false,
+    menu: <ProfileMenu></ProfileMenu>,
   },
 ];

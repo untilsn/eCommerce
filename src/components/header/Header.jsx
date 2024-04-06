@@ -13,7 +13,6 @@ const Header = () => {
         <TopHeader></TopHeader>
         <HeaderBottom></HeaderBottom>
       </div>
-      <Outlet></Outlet>
     </div>
   );
 };

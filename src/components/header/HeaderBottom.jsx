@@ -2,6 +2,7 @@ import React from "react";
 import SearchInput from "../search/SearchInput";
 import HeaderFeature from "../../utils/HeaderFeature";
 import { iconHeaderList } from "../icon/Icons";
+import { useNavigate } from "react-router-dom";
 
 const HeaderBottom = () => {
   return (
@@ -16,7 +17,7 @@ const HeaderBottom = () => {
       <SearchInput></SearchInput>
       <div className="flex items-center justify-end gap-10">
         {iconHeaderList.map((item) => (
-          <HeaderFeature key={item.title} icon={item.icon}>
+          <HeaderFeature item={item} key={item.title} icon={item.icon}>
             {item.title}
           </HeaderFeature>
         ))}

@@ -21,15 +21,15 @@ const DashboardFeature = () => {
         {/* feature */}
         <div className="flex items-center col-span-2 px-4 capitalize ">
           {dashboardLink.map((item) => (
-            <Link
+            <NavLink
               onMouseEnter={() => handleMenuHover(item)}
               onMouseLeave={() => handleMenuClose(item)}
-              to={item.url}
-              key={item.name}
-              className="relative w-full px-4 py-5 mx-auto text-black group"
+              to={item?.url}
+              key={item?.name}
+              className="relative w-full px-2 py-5 mx-auto text-black group"
             >
               {location.pathname === item.url ? (
-                <div className="flex items-center gap-2">
+                <div className="flex items-center justify-center gap-2">
                   <span className="text-yellow">{item.name}</span>
                   <span>
                     <svg
@@ -50,7 +50,7 @@ const DashboardFeature = () => {
                   <span className="absolute bottom-0 left-0  h-[2px] w-full bg-yellow"></span>
                 </div>
               ) : (
-                <div className="flex items-center gap-2">
+                <div className="flex items-center justify-center gap-2">
                   <span className="group-hover:text-yellow">{item.name}</span>
                   <span>
                     <svg
@@ -73,7 +73,7 @@ const DashboardFeature = () => {
                 </div>
               )}
               {itemHover === item.name ? item.menu : ""}
-            </Link>
+            </NavLink>
           ))}
         </div>
 

@@ -24,7 +24,7 @@ export const ReviewIcon = () => {
 const CardItem = () => {
   return (
     <div className="z-0 group relative max-w-[400px] w-full h-[500px] border border-gray border-opacity-15 bg-light">
-      <div className="relative -z-20">
+      <div className="relative overflow-hidden -z-20">
         <img
           className="w-full h-[276px] object-cover"
           src="/item/itemcard1.jpg"

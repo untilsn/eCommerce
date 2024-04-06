@@ -3,7 +3,7 @@ import menuImg from "/public/menu-img1.jpg";
 
 const ProductMenu = () => {
   return (
-    <div className="flex h-[500xp] mt-20 bg-white shadow-md absolute justify-between -top-7 left-0 w-[570px]">
+    <div className="flex h-[500xp]  bg-white shadow-md absolute justify-between top-[100%] left-0 w-[570px]">
       <div>
         <div className="p-10 capitalize ">
           {/* 11 */}

@@ -16,7 +16,7 @@ const AuthenModal = () => {
         className="fixed inset-0 z-50 bg-black bg-opacity-25"
       ></div>
       {/* modal */}
-      <div className="max-w-[720px] w-full rounded z-50 p-14 bg-light  fixed inset-0 top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4 h-[90vh]">
+      <div className="max-w-[720px] w-full rounded z-50 p-14 bg-light  fixed inset-0 top-2/4 left-2/4 -translate-x-2/4 overflow-y-auto -translate-y-2/4 h-[90vh]">
         {/* close */}
         <button
           onClick={() => dispatch(openModalAuth(false))}

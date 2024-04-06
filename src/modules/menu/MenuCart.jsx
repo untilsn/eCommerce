@@ -3,7 +3,7 @@ import { FaAngleRight } from "react-icons/fa6";
 
 const MenuCart = () => {
   return (
-    <div className=" h-[500xp] bg-white shadow-md absolute top-12 p-10 left-0 w-[300px]">
+    <div className=" h-[500xp] bg-white shadow-md absolute top-[100%] p-10 left-0 w-[300px]">
       <div className="flex flex-col w-full gap-3">
         <div className="flex items-center justify-between w-full text-lg hover:text-yellow text-gray text-opacity-90">
           <span>About</span>

@@ -2,26 +2,23 @@ import React, { useState } from "react";
 import { IoIosMenu } from "react-icons/io";
 import { IoMdClose } from "react-icons/io";
 
+export const categoryList = ["computer", "sextoi", "pillowwaifu"];
+
 const BrowserCategories = () => {
-  const [hovered, setHovered] = useState(true);
-  const handleHoverClose = () => {
-    setHovered(false);
-  };
-  const handleHoverOpen = () => {
-    setHovered(true);
-  };
+  const [hovered, setHovered] = useState(false);
+
   return (
     <div
-      onMouseEnter={handleHoverClose}
-      onMouseLeave={handleHoverOpen}
-      className="flex items-center justify-between h-[60px] px-4 gap-3 text-black  hover:bg-yellow group"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="flex items-center justify-between transition-all h-[60px] px-4 gap-3 text-black relative hover:bg-yellow group"
     >
       <div className="flex items-center gap-3">
-        <span className="py-3 text-3xl ">
+        <span className="py-3 text-3xl text-opacity-90 text-dark ">
           {hovered ? (
-            <IoIosMenu />
-          ) : (
             <IoMdClose className="group-hover:text-light" />
+          ) : (
+            <IoIosMenu />
           )}
         </span>
         <span className="text-lg group-hover:text-white">
@@ -45,6 +42,21 @@ const BrowserCategories = () => {
           />
         </svg>
       </span>
+      {/* categori */}
+      {hovered ? (
+        <div className="absolute top-[100%] left-0 right-0 bg-white shadow-lg">
+          {categoryList.map((item, index) => (
+            <div
+              key={index}
+              className="p-5 text-base capitalize hover:bg-gray hover:bg-opacity-5 text-dark border-b_primary"
+            >
+              {item}
+            </div>
+          ))}
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

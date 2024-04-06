@@ -4,31 +4,69 @@ import InputForm from "../../components/input/InputForm";
 import InputContaint from "../../components/input/InputContaint";
 import Label from "../../components/label/Label";
 import ButtonForm from "../../components/button/ButtonForm";
+import { auth } from "../../config/firebaseConfigure";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  loginFailure,
+  loginStart,
+  loginSuccess,
+  openModalAuth,
+} from "../../redux/slice/authSlice";
+import { toast } from "react-toastify";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { useNavigate } from "react-router-dom";
 
-const Login = ({ switchToSignUp, onClose }) => {
-  // const schema = yup.object({
-  //   email: yup
-  //     .string()
-  //     .email("Your email is invalid")
-  //     .required("Please enter your emailaddress"),
-  //   password: yup
-  //     .string()
-  //     .min(8, "Your password must be at least 8 character or greater"),
-  // });
-
-  const { control, handleSubmit } = useForm({
-    defaultValues: "",
-    mode: "onSubmit",
+const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { error } = useSelector((state) => state.auth);
+  if (error) toast.error("wrong email or password");
+  const schema = yup.object({
+    email: yup
+      .string()
+      .email("Your email is invalid")
+      .required("Please enter your emailaddress"),
+    password: yup
+      .string()
+      .min(8, "Your password must be at least 8 character or greater"),
   });
-  const handleLogin = (values) => {
-    // if (!isValid) return;
-    // try {
-    //   signInWithEmailAndPassword(auth, values.email, values.password);
-    //   toast.success(`welcome back ${userInfo.fullname}`);
-    //   onClose();
-    // } catch (error) {
-    //   error ? toast.error("Invalid email or password") : "";
-    // }
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+    mode: "onSubmit",
+    resolver: yupResolver(schema),
+  });
+  const handleLogin = async (values) => {
+    if (!values) return;
+    dispatch(loginStart());
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        values.email,
+        values.password
+      );
+      dispatch(
+        loginSuccess({
+          email: userCredential.user.email,
+          uid: userCredential.user.uid,
+        })
+      );
+
+      toast.success("ưoaoao");
+      navigate("/");
+      dispatch(openModalAuth(false));
+    } catch (error) {
+      dispatch(loginFailure(error.message));
+    }
   };
   return (
     <form onSubmit={handleSubmit(handleLogin)}>
@@ -40,6 +78,11 @@ const Login = ({ switchToSignUp, onClose }) => {
             control={control}
             placeholder="enter you username"
           ></InputForm>
+          {errors ? (
+            <span className="mt-2 text-red">{errors?.email?.message}</span>
+          ) : (
+            ""
+          )}
         </InputContaint>
         <InputContaint>
           <Label id="password">password *</Label>
@@ -49,11 +92,16 @@ const Login = ({ switchToSignUp, onClose }) => {
             control={control}
             placeholder="enter you password"
           ></InputForm>
+          {errors ? (
+            <span className="mt-2 text-red">{errors?.password?.message}</span>
+          ) : (
+            ""
+          )}
         </InputContaint>
       </div>
       {/* button submit */}
-      <div className="flex items-center justify-between mb-5">
-        <ButtonForm>LOG IN</ButtonForm>
+      <div className="flex items-center justify-between my-5">
+        <ButtonForm type="submit">LOG IN</ButtonForm>
         <span className="text-lg capitalize hover:text-yellow">
           forget password
         </span>

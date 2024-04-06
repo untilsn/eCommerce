@@ -4,43 +4,76 @@ import InputForm from "../../components/input/InputForm";
 import InputContaint from "../../components/input/InputContaint";
 import Label from "../../components/label/Label";
 import ButtonForm from "../../components/button/ButtonForm";
-
+import { useDispatch } from "react-redux";
+import { openModalAuth, registerUser } from "../../redux/slice/authSlice";
+import { toast } from "react-toastify";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 const Register = () => {
-  // const schema = yup.object({
-  //   email: yup
-  //     .string()
-  //     .email("Your email is invalid")
-  //     .required("Please enter your emailaddress"),
-  //   password: yup
-  //     .string()
-  //     .min(8, "Your password must be at least 8 character or greater"),
-  // });
-
-  const { control, handleSubmit } = useForm({
-    defaultValues: "",
-    mode: "onSubmit",
+  const dispatch = useDispatch();
+  const schema = yup.object({
+    email: yup
+      .string()
+      .email("Your email is invalid")
+      .required("Please enter your emailaddress"),
+    username: yup.string().required("Please fill your username"),
+    password: yup
+      .string()
+      .min(8, "Your password must be at least 8 character or greater"),
   });
-  const handleLogin = (values) => {
-    // if (!isValid) return;
-    // try {
-    //   signInWithEmailAndPassword(auth, values.email, values.password);
-    //   toast.success(`welcome back ${userInfo.fullname}`);
-    //   onClose();
-    // } catch (error) {
-    //   error ? toast.error("Invalid email or password") : "";
-    // }
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      email: "",
+      username: "",
+      password: "",
+    },
+    mode: "onSubmit",
+    resolver: yupResolver(schema),
+  });
+  const handleRegister = async (values, e) => {
+    if (!values) return;
+    try {
+      dispatch(registerUser(values.email, values.password, values.username));
+      dispatch(openModalAuth(false));
+      toast.success("hollray");
+    } catch (error) {
+      toast.error("ưhâtt");
+    }
   };
   return (
-    <form onSubmit={handleSubmit(handleLogin)}>
+    <form onSubmit={handleSubmit(handleRegister)}>
       <div className="flex flex-col gap-5 py-5">
         <InputContaint>
-          <Label id="email">username or emailaddress *</Label>
+          <Label id="email">emailaddress *</Label>
           <InputForm
             name="email"
+            control={control}
+            placeholder="enter you emaildress"
+          ></InputForm>
+          {errors ? (
+            <span className="text-red">{errors?.email?.message}</span>
+          ) : (
+            ""
+          )}
+        </InputContaint>
+        <InputContaint>
+          <Label id="username">username *</Label>
+          <InputForm
+            name="username"
             control={control}
             placeholder="enter you username"
           ></InputForm>
         </InputContaint>
+        {errors ? (
+          <span className="text-red">{errors?.username?.message}</span>
+        ) : (
+          ""
+        )}
         <InputContaint>
           <Label id="password">password *</Label>
           <InputForm
@@ -49,11 +82,16 @@ const Register = () => {
             control={control}
             placeholder="enter you password"
           ></InputForm>
+          {errors ? (
+            <span className="text-red">{errors?.password?.message}</span>
+          ) : (
+            ""
+          )}
         </InputContaint>
       </div>
       {/* button submit */}
-      <div className="flex items-center justify-between mb-5">
-        <ButtonForm>SIGN UP</ButtonForm>
+      <div className="flex items-center justify-between my-5">
+        <ButtonForm type="submit">SIGN UP</ButtonForm>
         <span className="text-lg capitalize hover:text-yellow">
           I agree to the privacy policy *
         </span>
