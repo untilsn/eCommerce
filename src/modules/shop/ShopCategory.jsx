@@ -51,10 +51,10 @@ const ShopCategory = () => {
             .fill(0)
             .map((item) => (
               <AccordionBody
-                className="py-3 text-xl font-normal capitalize text-dark"
+                className="py-3 text-sm font-normal capitalize text-dark"
                 key={v4()}
               >
-                <div className="flex items-center justify-between text-lg">
+                <div className="flex items-center justify-between text-sm">
                   <span className="capitalize text-dark">name</span>
                   <span className="px-2 py-0 rounded bg-gray bg-opacity-10 text-dark">
                     0
@@ -74,10 +74,10 @@ const ShopCategory = () => {
             .fill(0)
             .map((item) => (
               <AccordionBody
-                className="py-3 text-xl font-normal capitalize text-dark"
+                className="py-3 text-sm font-normal capitalize text-dark"
                 key={v4()}
               >
-                <div className="flex items-center justify-between text-lg">
+                <div className="flex items-center justify-between text-sm">
                   <span className="capitalize text-dark">name</span>
                   <span className="px-2 py-0 rounded bg-gray bg-opacity-10 text-dark">
                     0

@@ -12,7 +12,7 @@ const FooterContact = () => {
               alt=""
             />
           </div>
-          <p className="text-lg text-gray text-opacity-60">
+          <p className="text-sm text-gray text-opacity-60">
             Praesent dapibus, neque id cursus ucibus, tortor neque egestas
             augue, eu vulputate magna eros eu erat.
           </p>
@@ -21,19 +21,19 @@ const FooterContact = () => {
               <FaPhoneAlt />
             </div>
             <div>
-              <div className="text-lg text-gray text-opacity-60">
+              <div className="text-sm text-gray text-opacity-60">
                 Got Question? Call us 24/7
               </div>
-              <span className="text-2xl">+0123 456 789</span>
+              <span className="text-base">+0123 456 789</span>
             </div>
           </div>
         </div>
         <div>
-          <h1 className="text-xl">Useful Links</h1>
-          <ul className="flex flex-col gap-3 mt-8">
+          <h1 className="text-lg">Useful Links</h1>
+          <ul className="flex flex-col gap-3 mt-5">
             <li>
               <a
-                className="text-lg hover:text-yellow text-gray text-opacity-70"
+                className="text-sm hover:text-yellow text-gray text-opacity-70"
                 href="#"
               >
                 About Molla
@@ -41,7 +41,7 @@ const FooterContact = () => {
             </li>
             <li>
               <a
-                className="text-lg hover:text-yellow text-gray text-opacity-70"
+                className="text-sm hover:text-yellow text-gray text-opacity-70"
                 href="#"
               >
                 Our Services
@@ -49,7 +49,7 @@ const FooterContact = () => {
             </li>
             <li>
               <a
-                className="text-lg hover:text-yellow text-gray text-opacity-70"
+                className="text-sm hover:text-yellow text-gray text-opacity-70"
                 href="#"
               >
                 How to shop on Molla
@@ -57,7 +57,7 @@ const FooterContact = () => {
             </li>
             <li>
               <a
-                className="text-lg hover:text-yellow text-gray text-opacity-70"
+                className="text-sm hover:text-yellow text-gray text-opacity-70"
                 href="#"
               >
                 FAQ
@@ -65,7 +65,7 @@ const FooterContact = () => {
             </li>
             <li>
               <a
-                className="text-lg hover:text-yellow text-gray text-opacity-70"
+                className="text-sm hover:text-yellow text-gray text-opacity-70"
                 href="#"
               >
                 Contact us
@@ -74,11 +74,11 @@ const FooterContact = () => {
           </ul>
         </div>
         <div>
-          <h1 className="text-xl">Customer Service</h1>
-          <ul className="flex flex-col gap-3 mt-8">
+          <h1 className="text-lg">Customer Service</h1>
+          <ul className="flex flex-col gap-3 mt-5">
             <li>
               <a
-                className="text-lg hover:text-yellow text-gray text-opacity-70"
+                className="text-sm hover:text-yellow text-gray text-opacity-70"
                 href="#"
               >
                 Payment Methods
@@ -86,7 +86,7 @@ const FooterContact = () => {
             </li>
             <li>
               <a
-                className="text-lg hover:text-yellow text-gray text-opacity-70"
+                className="text-sm hover:text-yellow text-gray text-opacity-70"
                 href="#"
               >
                 Money-back guarantee!
@@ -94,7 +94,7 @@ const FooterContact = () => {
             </li>
             <li>
               <a
-                className="text-lg hover:text-yellow text-gray text-opacity-70"
+                className="text-sm hover:text-yellow text-gray text-opacity-70"
                 href="#"
               >
                 Returns
@@ -102,7 +102,7 @@ const FooterContact = () => {
             </li>
             <li>
               <a
-                className="text-lg hover:text-yellow text-gray text-opacity-70"
+                className="text-sm hover:text-yellow text-gray text-opacity-70"
                 href="#"
               >
                 Shipping
@@ -110,7 +110,7 @@ const FooterContact = () => {
             </li>
             <li>
               <a
-                className="text-lg hover:text-yellow text-gray text-opacity-70"
+                className="text-sm hover:text-yellow text-gray text-opacity-70"
                 href="#"
               >
                 Terms and conditions
@@ -118,7 +118,7 @@ const FooterContact = () => {
             </li>
             <li>
               <a
-                className="text-lg hover:text-yellow text-gray text-opacity-70"
+                className="text-sm hover:text-yellow text-gray text-opacity-70"
                 href="#"
               >
                 Privacy Policy
@@ -127,11 +127,11 @@ const FooterContact = () => {
           </ul>
         </div>
         <div>
-          <h1 className="text-xl">My Account</h1>
-          <ul className="flex flex-col gap-3 mt-8">
+          <h1 className="text-lg">My Account</h1>
+          <ul className="flex flex-col gap-3 mt-5">
             <li>
               <a
-                className="text-lg hover:text-yellow text-gray text-opacity-70"
+                className="text-sm hover:text-yellow text-gray text-opacity-70"
                 href="#"
               >
                 Sign In
@@ -139,7 +139,7 @@ const FooterContact = () => {
             </li>
             <li>
               <a
-                className="text-lg hover:text-yellow text-gray text-opacity-70"
+                className="text-sm hover:text-yellow text-gray text-opacity-70"
                 href="#"
               >
                 View Cart
@@ -147,7 +147,7 @@ const FooterContact = () => {
             </li>
             <li>
               <a
-                className="text-lg hover:text-yellow text-gray text-opacity-70"
+                className="text-sm hover:text-yellow text-gray text-opacity-70"
                 href="#"
               >
                 My Wishlist
@@ -155,7 +155,7 @@ const FooterContact = () => {
             </li>
             <li>
               <a
-                className="text-lg hover:text-yellow text-gray text-opacity-70"
+                className="text-sm hover:text-yellow text-gray text-opacity-70"
                 href="#"
               >
                 Track My Order
@@ -163,7 +163,7 @@ const FooterContact = () => {
             </li>
             <li>
               <a
-                className="text-lg hover:text-yellow text-gray text-opacity-70"
+                className="text-sm hover:text-yellow text-gray text-opacity-70"
                 href="#"
               >
                 Help

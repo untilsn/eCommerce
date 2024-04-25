@@ -1,59 +1,56 @@
 import React, { useState } from "react";
+import { v4 } from "uuid";
+import { AiOutlineLike } from "react-icons/ai";
+import { AiOutlineDislike } from "react-icons/ai";
 
-const ProductDesc = () => {
-  const [tabs, setTabs] = useState("desc");
-
+const ProductDesc = ({ item }) => {
+  const [tabs, setTabs] = useState("review");
+  console.log(item?.reviews);
   return (
     <div className="">
       <div className="flex items-center justify-center gap-10">
         <div
-          onClick={() => setTabs("desc")}
-          className={`py-3 px-4 text-xl capitalize border-b-2 border-transparent hover:text-yellow hover:border-b-2 hover:border-yellow ${
-            tabs === "desc"
+          onClick={() => setTabs("review")}
+          className={`py-3 px-4 text-lg capitalize border-b-2 border-transparent hover:text-yellow hover:border-b-2 hover:border-yellow ${
+            tabs === "review"
               ? "text-yellow border-b-2 border-yellow"
               : "text-dark "
           }`}
         >
-          Description
+          Reviews ({item?.reviews?.length || 0})
         </div>
 
         <div
-          onClick={() => setTabs("reture")}
-          className={`py-3 px-4 text-xl capitalize border-b-2 border-transparent hover:text-yellow hover:border-b-2 hover:border-yellow ${
-            tabs === "reture"
+          onClick={() => setTabs("description")}
+          className={`py-3 px-4 text-lg capitalize border-b-2 border-transparent hover:text-yellow hover:border-b-2 hover:border-yellow ${
+            tabs === "description"
+              ? "text-yellow border-b-2 border-yellow"
+              : "text-dark "
+          }`}
+        >
+          description
+        </div>
+        <div
+          onClick={() => setTabs("rule")}
+          className={`py-3 px-4 text-lg capitalize border-b-2 border-transparent hover:text-yellow hover:border-b-2 hover:border-yellow ${
+            tabs === "rule"
               ? "text-yellow border-b-2 border-yellow"
               : "text-dark "
           }`}
         >
           Shipping & Returns
         </div>
-        <div
-          onClick={() => setTabs("review")}
-          className={`py-3 px-4 text-xl capitalize border-b-2 border-transparent hover:text-yellow hover:border-b-2 hover:border-yellow ${
-            tabs === "review"
-              ? "text-yellow border-b-2 border-yellow"
-              : "text-dark "
-          }`}
-        >
-          Reviews (2)
-        </div>
       </div>
-      {tabs === "desc" ? (
-        <div className="p-10 mt-5 text-lg leading-8 border text-gray border-gray border-opacity-20">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium
-          similique voluptatibus, dicta et voluptates, distinctio veritatis,
-          architecto magnam ratione reiciendis dolore nisi error tempore fugiat
-          molestiae incidunt ab ducimus ullam. <br />
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sapiente
-          temporibus, nemo est quia corporis dignissimos tempora, porro, earum
-          aspernatur excepturi itaque sunt aperiam consequatur nostrum vitae aut
-          recusandae ut saepe.
+      {tabs === "description" ? (
+        <div className="p-10 mt-5 text-sm font-light leading-8 border text-gray border-gray border-opacity-20">
+          <h3 className="mb-6 text-base font-medium text-dark">Description</h3>
+          {item.desc}
         </div>
-      ) : tabs === "reture" ? (
-        <div className="p-10 mt-5 text-lg font-light leading-8 border text-gray border-gray border-opacity-10">
-          <h1 className="mb-5 text-xl font-normal text-dark">
+      ) : tabs === "rule" ? (
+        <div className="p-10 mt-5 text-sm font-light leading-8 border text-gray border-gray border-opacity-10">
+          <h3 className="mb-6 text-base font-medium text-dark">
             Delivery & returns
-          </h1>
+          </h3>
           We deliver to over 100 countries around the world. For full details of
           the{" "}
           <a
@@ -72,6 +69,34 @@ const ProductDesc = () => {
           >
             Returns information
           </a>
+        </div>
+      ) : tabs === "review" ? (
+        <div className="p-10 mt-5 text-sm leading-8 border text-gray border-gray border-opacity-20">
+          <h3 className="text-base font-medium text-dark">
+            Reviews ({item?.reviews?.length || 0})
+          </h3>
+          {item?.reviews?.length <= 1 ? (
+            <div>no commmet</div>
+          ) : (
+            item?.reviews?.map((desc) => (
+              <div
+                key={v4()}
+                className="py-10 text-sm font-light border-b text-gray border-gray border-opacity-20"
+              >
+                {desc}
+                <div className="flex items-center gap-10 mt-10">
+                  <span className="flex items-center gap-2 text-sm">
+                    <AiOutlineLike />
+                    Helpful (2)
+                  </span>
+                  <span className="flex items-center gap-2 text-sm">
+                    <AiOutlineDislike />
+                    Unhelpful (2)
+                  </span>
+                </div>
+              </div>
+            ))
+          )}
         </div>
       ) : (
         ""

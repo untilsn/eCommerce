@@ -5,10 +5,11 @@ const CheckboxItem = ({ children = "Free Shipping", labelItem }) => {
   return (
     <div className="flex items-center justify-between">
       <Checkbox
-        className="checked:border-yellow checked:p-1 checked:bg-yellow"
+        ripple={true}
+        className=" checked:border-yellow checked:p-1 checked:bg-yellow"
         label={labelItem}
       />
-      <div className="text-lg text-dark text-opacity-80">{children}</div>
+      <div className="text-sm text-dark text-opacity-80">{children}</div>
     </div>
   );
 };

@@ -18,7 +18,7 @@ const PromoBanner = () => {
             <span className="text-yellow">New Deals</span>
             <div>Start Daily at 12pm e.t.</div>
           </div>
-          <div className="text-xl text-gray max-w-[440px] w-full ">
+          <div className="text-sm text-gray max-w-[440px] w-full ">
             <p>
               Get<span className="text-darkPrimary">FREE SHIPPING* & 5% </span>
               rewards on every order with Molla Theme rewards program

@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import InputForm from "../../components/input/InputForm";
 import InputContaint from "../../components/input/InputContaint";
 import Label from "../../components/label/Label";
 import ButtonForm from "../../components/button/ButtonForm";
-import { auth } from "../../config/firebaseConfigure";
+import { auth, db } from "../../config/firebaseConfigure";
 import { useDispatch, useSelector } from "react-redux";
 import {
   loginFailure,
@@ -13,10 +13,18 @@ import {
   openModalAuth,
 } from "../../redux/slice/authSlice";
 import { toast } from "react-toastify";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
+import {
+  collection,
+  doc,
+  getDoc,
+  onSnapshot,
+  query,
+  where,
+} from "firebase/firestore";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -49,23 +57,13 @@ const Login = () => {
     if (!values) return;
     dispatch(loginStart());
     try {
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        values.email,
-        values.password
-      );
-      dispatch(
-        loginSuccess({
-          email: userCredential.user.email,
-          uid: userCredential.user.uid,
-        })
-      );
-
-      toast.success("ưoaoao");
+      await signInWithEmailAndPassword(auth, values?.email, values?.password);
+      toast.success("Login success");
       navigate("/");
       dispatch(openModalAuth(false));
     } catch (error) {
       dispatch(loginFailure(error.message));
+      console.log(error);
     }
   };
   return (
@@ -79,7 +77,7 @@ const Login = () => {
             placeholder="enter you username"
           ></InputForm>
           {errors ? (
-            <span className="mt-2 text-red">{errors?.email?.message}</span>
+            <span className="mt-2 text-redLite">{errors?.email?.message}</span>
           ) : (
             ""
           )}
@@ -93,7 +91,9 @@ const Login = () => {
             placeholder="enter you password"
           ></InputForm>
           {errors ? (
-            <span className="mt-2 text-red">{errors?.password?.message}</span>
+            <span className="mt-2 text-redLite">
+              {errors?.password?.message}
+            </span>
           ) : (
             ""
           )}
@@ -102,12 +102,12 @@ const Login = () => {
       {/* button submit */}
       <div className="flex items-center justify-between my-5">
         <ButtonForm type="submit">LOG IN</ButtonForm>
-        <span className="text-lg capitalize hover:text-yellow">
+        <span className="text-sm capitalize hover:text-yellow">
           forget password
         </span>
       </div>
       <div className="w-full h-[1px] bg-slate-300"></div>
-      <div className="p-4 text-lg text-center">or sign in with</div>
+      <div className="p-4 text-sm text-center">or sign in with</div>
       <div className="flex items-center justify-between gap-20">
         <div className="flex items-center justify-center w-full gap-3 p-3 border hover:bg-gray hover:bg-opacity-10 border-gray">
           <span>

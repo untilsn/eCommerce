@@ -10,7 +10,7 @@ const DealOutlet = () => {
     <div className="container">
       <div className="text-center">
         <TitlePath>Deals & Outlet</TitlePath>
-        <div className="mt-2 text-xl text-grayDark text-opacity-70">
+        <div className="mt-2 text-sm text-grayDark text-opacity-70">
           today’s deal and more
         </div>
       </div>
@@ -26,14 +26,14 @@ const DealOutlet = () => {
         >
           <div className="flex flex-col gap-20 p-10">
             <div>
-              <div className="text-2xl font-semibold text-red text-opacity-60">
+              <div className="text-2xl font-semibold text-redLite text-opacity-60">
                 Deal of the Day.
               </div>
-              <div className="text-xl text-gray">Limited quantities.</div>
+              <div className="text-sm text-gray">Limited quantities.</div>
             </div>
             <div>
-              <div className="text-xl ">Brown faux fur longline coat</div>
-              <div className="text-2xl text-red text-opacity-60">
+              <div className="text-sm ">Brown faux fur longline coat</div>
+              <div className="text-2xl text-redLite text-opacity-60">
                 $310.00{" "}
                 <span className="text-gray text-opacity-60"> Was $190.00</span>
               </div>

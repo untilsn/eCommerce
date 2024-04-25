@@ -13,7 +13,7 @@ const ButtonForm = ({
     <div>
       <button
         type={type}
-        className={`flex items-center justify-between w-full gap-2 p-3 text-xl uppercase transition-all duration-300 border-2 hover:bg-yellow group hover:text-light text-yellow border-yellow ${classname}`}
+        className={`flex items-center justify-between w-full gap-2 p-3 text-sm uppercase transition-all duration-300 border-2 hover:bg-yellow group hover:text-light text-yellow border-yellow ${classname}`}
       >
         {children}
         <span>

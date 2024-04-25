@@ -31,7 +31,7 @@ const MyForm = () => {
           </label>
           <input
             type="text"
-            className="bg-red-400 form-control"
+            className="bg-redLite-400 form-control"
             id="firstName"
             name="firstName"
             value={formData.firstName}

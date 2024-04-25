@@ -8,8 +8,30 @@ import WishlistPage from "./pages/WishlistPage";
 import ScrollTopButton from "./components/button/ScrollTopButton";
 import DashboardPage from "./pages/DashboardPage";
 import PageStyles from "./pages/PageStyles";
+import DashboardMainPage from "./pages/manage/DashboardMainPage";
+import DashboardProduct from "./pages/manage/DashboardProduct";
+import DashboardCategory from "./pages/manage/DashboardCategory";
+import { onAuthStateChanged } from "firebase/auth";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { useDispatch } from "react-redux";
+import { auth } from "./config/firebaseConfigure";
+import { loginSuccess } from "./redux/slice/authSlice";
+import { useEffect } from "react";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        dispatch(loginSuccess(user));
+      } else {
+        dispatch(loginSuccess(null));
+      }
+    });
+
+    return () => unsubscribe();
+  }, [dispatch]);
   return (
     <>
       <Routes>
@@ -26,10 +48,20 @@ function App() {
           <Route path="/cart" element={<CartPage></CartPage>}></Route>
         </Route>
         {/* dashboard */}
-        <Route
-          path="/dashboard"
-          element={<DashboardPage></DashboardPage>}
-        ></Route>
+        <Route path="" element={<DashboardPage></DashboardPage>}>
+          <Route
+            path="/manage"
+            element={<DashboardMainPage></DashboardMainPage>}
+          ></Route>
+          <Route
+            path="/manage/product"
+            element={<DashboardProduct></DashboardProduct>}
+          ></Route>
+          <Route
+            path="/manage/category"
+            element={<DashboardCategory></DashboardCategory>}
+          ></Route>
+        </Route>
       </Routes>
       {/* funtion */}
       <AuthenModal></AuthenModal>

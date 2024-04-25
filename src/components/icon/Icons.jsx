@@ -4,17 +4,17 @@ import { IoMdHeartEmpty } from "react-icons/io";
 
 export const iconHeaderList = [
   {
-    icon: <MdCompareArrows className="text-4xl" />,
+    icon: <MdCompareArrows className="text-3xl" />,
     title: "compare",
     url: "/compare",
   },
   {
-    icon: <IoMdHeartEmpty className="text-4xl" />,
+    icon: <IoMdHeartEmpty className="text-3xl" />,
     title: "wishlist",
     url: "/wishlist",
   },
   {
-    icon: <IoCartOutline className="text-4xl" />,
+    icon: <IoCartOutline className="text-3xl" />,
     title: "cart",
     url: "/cart",
   },

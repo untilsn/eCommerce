@@ -10,7 +10,7 @@ export const ReviewIcon = () => {
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       fill="currentColor"
-      className="w-5 h-5 text-yellow"
+      className="w-4 h-4 text-yellow"
     >
       <path
         fillRule="evenodd"
@@ -36,7 +36,7 @@ const CardItem = () => {
         </div>
         {/* Cart and Binoculars icons */}
         <div
-          className="absolute z-0 bottom-0 left-0 right-0  text-xl flex items-center justify-evenly h-[50px] bg-darkPrimary text-light 
+          className="absolute z-0 bottom-0 left-0 right-0  text-sm flex items-center justify-evenly h-[50px] bg-darkPrimary text-light 
           translate-y-[100%]  group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all"
         >
           <div>
@@ -51,10 +51,10 @@ const CardItem = () => {
       {/* Content */}
       <div className="flex flex-col gap-2 p-5 bg-light">
         <div className="capitalize text-gray">apple,watch</div>
-        <h1 className="text-xl">
+        <h1 className="text-sm">
           Apple – Watch Series 3 with White Sport Band
         </h1>
-        <h2 className="text-xl text-yellow">$22.4</h2>
+        <h2 className="text-sm text-yellow">$22.4</h2>
         <div className="flex items-center gap-5">
           <div className="flex items-center gap-1">
             {Array(5)

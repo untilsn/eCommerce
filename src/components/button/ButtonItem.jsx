@@ -5,9 +5,9 @@ const ButtonItem = ({ children, kind = "primary", className }) => {
     <button
       className={`${
         kind === "primary"
-          ? "inline-flex items-center gap-3 px-5 py-4 text-lg rounded-full bg-yellow text-light"
-          : "bg-transparent border border-gray  inline-flex items-center gap-3 px-5 py-4 text-lg rounded-full border-opacity-60 hover:bg-light hover:text-yellow"
-      } ${className} transition-all `}
+          ? "inline-flex items-center gap-3 px-2 py-3 text-sm rounded-full bg-yellow text-light"
+          : "bg-transparent border border-gray  inline-flex items-center gap-3 px-5 py-4 text-sm rounded-full border-opacity-60 hover:bg-light hover:text-yellow"
+      } ${className}  `}
     >
       {children}
       <span>
@@ -15,7 +15,7 @@ const ButtonItem = ({ children, kind = "primary", className }) => {
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           fill="currentColor"
-          className="w-6 h-6 "
+          className="w-5 h-5 "
         >
           <path
             fillRule="evenodd"

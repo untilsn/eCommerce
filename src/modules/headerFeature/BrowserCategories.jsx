@@ -11,7 +11,7 @@ const BrowserCategories = () => {
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="flex items-center justify-between transition-all h-[60px] px-4 gap-3 text-black relative hover:bg-yellow group"
+      className="relative flex items-center justify-between h-full gap-3 px-4 text-black transition-all border-r border-gray border-opacity-10 hover:bg-yellow group"
     >
       <div className="flex items-center gap-3">
         <span className="py-3 text-3xl text-opacity-90 text-dark ">
@@ -21,7 +21,7 @@ const BrowserCategories = () => {
             <IoIosMenu />
           )}
         </span>
-        <span className="text-lg group-hover:text-white">
+        <span className="text-sm group-hover:text-white">
           Browse Categories
         </span>
       </div>
@@ -48,7 +48,7 @@ const BrowserCategories = () => {
           {categoryList.map((item, index) => (
             <div
               key={index}
-              className="p-5 text-base capitalize hover:bg-gray hover:bg-opacity-5 text-dark border-b_primary"
+              className="p-5 text-sm capitalize hover:bg-gray hover:bg-opacity-5 text-dark border-b_primary"
             >
               {item}
             </div>

@@ -3,13 +3,13 @@ import { FaLongArrowAltRight } from "react-icons/fa";
 
 const BoxInfoSubBanner = ({ title, subTitle, heading }) => {
   return (
-    <div className="px-8 py-3">
-      <h2 className="text-lg text-gray text-opacity-60">{heading}</h2>
-      <h1 className="text-2xl font-semibold text-darkPrimary">
+    <div className="inline-flex flex-col px-8 pt-3 pb-2">
+      <h2 className="text-sm text-gray text-opacity-60">{heading}</h2>
+      <h1 className="text-xl font-semibold text-darkPrimary">
         {title} <br />
-        <span className="text-2xl font-normal">{subTitle}</span>
+        <span>{subTitle}</span>
       </h1>
-      <a className="inline-flex items-center gap-3 px-3 py-1 -ml-3 bg-transparent rounded-full text-yellow hover:bg-yellow hover:text-white">
+      <a className="inline-flex items-center justify-start gap-3 px-3 py-2 -ml-3 max-w-[120px] w-full bg-transparent rounded-full text-yellow hover:bg-yellow hover:text-white">
         Shop Now
         <span>
           <FaLongArrowAltRight />

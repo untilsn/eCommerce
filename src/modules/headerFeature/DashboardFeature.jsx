@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { dashboardLink } from "./DashboardLink";
 import BrowserCategories from "./BrowserCategories";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
 import MenuShop from "../menu/MenuShop";
 
 const DashboardFeature = () => {
@@ -14,22 +14,24 @@ const DashboardFeature = () => {
     setItemHover("");
   };
   return (
-    <div className="sticky top-0 z-30 bg-white shadow-primaryShadow">
+    <div className="sticky -top-[1px] z-30 h-[53px]  bg-white shadow-primaryShadow">
       <div className="container grid items-center justify-between grid-cols-4">
         {/* categories */}
         <BrowserCategories></BrowserCategories>
         {/* feature */}
-        <div className="flex items-center col-span-2 px-4 capitalize ">
+        <div className="flex items-center col-span-2  text-[13px] capitalize">
           {dashboardLink.map((item) => (
-            <NavLink
+            <div
               onMouseEnter={() => handleMenuHover(item)}
               onMouseLeave={() => handleMenuClose(item)}
-              to={item?.url}
               key={item?.name}
-              className="relative w-full px-2 py-5 mx-auto text-black group"
+              className="relative w-full px-3 py-[17px] mx-auto text-black group"
             >
               {location.pathname === item.url ? (
-                <div className="flex items-center justify-center gap-2">
+                <NavLink
+                  to={item?.url}
+                  className="flex items-center justify-center gap-2"
+                >
                   <span className="text-yellow">{item.name}</span>
                   <span>
                     <svg
@@ -38,7 +40,7 @@ const DashboardFeature = () => {
                       viewBox="0 0 24 24"
                       strokeWidth={1}
                       stroke="currentColor"
-                      className="w-5 h-5 text-yellow"
+                      className="w-4 h-4 text-yellow"
                     >
                       <path
                         strokeLinecap="round"
@@ -47,10 +49,13 @@ const DashboardFeature = () => {
                       />
                     </svg>
                   </span>
-                  <span className="absolute bottom-0 left-0  h-[2px] w-full bg-yellow"></span>
-                </div>
+                  <span className="absolute bottom-0 left-0  h-[1px] w-full bg-yellow"></span>
+                </NavLink>
               ) : (
-                <div className="flex items-center justify-center gap-2">
+                <NavLink
+                  to={item?.url}
+                  className="flex items-center justify-center gap-2"
+                >
                   <span className="group-hover:text-yellow">{item.name}</span>
                   <span>
                     <svg
@@ -59,7 +64,7 @@ const DashboardFeature = () => {
                       viewBox="0 0 24 24"
                       strokeWidth={1}
                       stroke="currentColor"
-                      className="w-5 h-5 text-gray group-hover:text-yellow"
+                      className="w-4 h-4 text-gray group-hover:text-yellow"
                     >
                       <path
                         strokeLinecap="round"
@@ -68,17 +73,18 @@ const DashboardFeature = () => {
                       />
                     </svg>
                   </span>
-                  <span className="absolute bottom-0 left-0 w-0 h-[2px] transition-all duration-300 group-hover:w-full bg-yellow"></span>
-                  <span className="absolute bottom-0 right-0 w-0 h-[2px] transition-all duration-300 group-hover:w-full bg-yellow"></span>
-                </div>
+                  <span className="absolute bottom-0 left-0 w-0 h-[1px] transition-all duration-300 group-hover:w-full bg-yellow"></span>
+                  <span className="absolute bottom-0 right-0 w-0 h-[1px] transition-all duration-300 group-hover:w-full bg-yellow"></span>
+                </NavLink>
               )}
               {itemHover === item.name ? item.menu : ""}
-            </NavLink>
+              {/* <Outlet></Outlet> */}
+            </div>
           ))}
         </div>
 
         {/* notion */}
-        <div className="text-lg text-end">
+        <div className="text-sm text-end">
           <span>Clearance</span>
           <span className="font-semibold">&nbsp;Up to 30% Off</span>
         </div>

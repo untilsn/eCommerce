@@ -3,38 +3,40 @@ import menuImg from "/public/menu-img1.jpg";
 
 const ProductMenu = () => {
   return (
-    <div className="flex h-[500xp]  bg-white shadow-md absolute justify-between top-[100%] left-0 w-[570px]">
+    <div className="flex h-[350px]  bg-white shadow-md absolute justify-between top-[100%] left-0 w-[450px]">
       <div>
         <div className="p-10 capitalize ">
           {/* 11 */}
-          <div className="flex flex-col gap-3">
-            <h1 className="text-xl font-normal uppercase">PRODUCT DETAILS</h1>
-            <div className="text-lg font-light text-gray text-opacity-90 hover:text-yellow">
+          <div className="flex flex-col gap-4">
+            <h1 className="text-[15px] font-normal uppercase">
+              PRODUCT DETAILS
+            </h1>
+            <div className="text-sm font-light text-gray text-opacity-90 hover:text-yellow">
               Default
             </div>
-            <div className="text-lg font-light text-gray text-opacity-90 hover:text-yellow">
+            <div className="text-sm font-light text-gray text-opacity-90 hover:text-yellow">
               Centered
             </div>
-            <div className="text-lg font-light text-gray text-opacity-90 hover:text-yellow">
+            <div className="text-sm font-light text-gray text-opacity-90 hover:text-yellow">
               Extended InfoNEW
             </div>
-            <div className="text-lg font-light text-gray text-opacity-90 hover:text-yellow">
+            <div className="text-sm font-light text-gray text-opacity-90 hover:text-yellow">
               Gallery
             </div>
-            <div className="text-lg font-light text-gray text-opacity-90 hover:text-yellow">
+            <div className="text-sm font-light text-gray text-opacity-90 hover:text-yellow">
               Sticky Info
             </div>
-            <div className="text-lg font-light text-gray text-opacity-90 hover:text-yellow">
+            <div className="text-sm font-light text-gray text-opacity-90 hover:text-yellow">
               Boxed With Sidebar
             </div>
-            <div className="text-lg font-light text-gray text-opacity-90 hover:text-yellow">
+            <div className="text-sm font-light text-gray text-opacity-90 hover:text-yellow">
               Full Width
             </div>
           </div>
         </div>
       </div>
       <div
-        className="p-10"
+        className="h-auto "
         style={{
           backgroundImage: `url(${menuImg})`,
           backgroundPosition: "center",
@@ -42,9 +44,9 @@ const ProductMenu = () => {
           backgroundSize: "cover",
         }}
       >
-        <div className="w-[220px] h-[360px] top-auto text-white text-2xl uppercase">
-          last chance <br />
-          <span className="text-4xl font-bold">sale</span>
+        <div className="w-[220px] h-[360px] px-10 py-8 flex flex-col justify-end  mb-auto text-white text-xl uppercase">
+          <div>new trends</div>
+          <div className="text-3xl font-bold">spring 2024</div>
         </div>
       </div>
     </div>

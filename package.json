@@ -24,6 +24,7 @@
     "react-router-dom": "^6.22.3",
     "react-toastify": "^10.0.4",
     "redux-logger": "^3.0.6",
+    "redux-persist": "^6.0.0",
     "sass": "^1.72.0",
     "swiper": "^11.1.0",
     "uuid": "^9.0.1",

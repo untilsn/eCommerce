@@ -18,10 +18,10 @@ const CartPage = () => {
             <div className="flex items-center gap-5 py-5">
               <input
                 type="text"
-                className="p-3 text-lg border-none outline-none bg-gray max-w-[300px] w-full bg-opacity-5"
+                className="p-3 text-sm border-none outline-none bg-gray max-w-[300px] w-full bg-opacity-5"
                 placeholder="coupon code"
               />
-              <button className="p-4 text-xl border text-yellow border-yellow">
+              <button className="p-4 text-sm border text-yellow border-yellow">
                 <FaArrowRightLong />
               </button>
             </div>

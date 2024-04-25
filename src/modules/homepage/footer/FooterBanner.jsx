@@ -17,7 +17,7 @@ const FooterBanner = () => {
         {/* right content */}
         <div className="flex-1 text-center">
           <h1 className="text-4xl">Shop Social</h1>
-          <p className="mt-5 text-xl font-normal text-gray text-opacity-60">
+          <p className="mt-5 text-sm font-normal text-gray text-opacity-60">
             Donec nec justo eget felis facilisis fermentum. Aliquam porttitor
             mauris sit amet orci.
           </p>
@@ -38,10 +38,10 @@ const FooterBanner = () => {
         {/* left content */}
         <div className="flex-1 text-center">
           <h1 className="text-4xl">Get the Latest Deals</h1>
-          <span className="text-xl font-normal text-gray text-opacity-60">
+          <span className="text-sm font-normal text-gray text-opacity-60">
             and
           </span>
-          <p className="text-xl font-normal text-gray text-opacity-60">
+          <p className="text-sm font-normal text-gray text-opacity-60">
             receive <span className="text-yellow">$20 coupon</span> for first
             shopping
           </p>

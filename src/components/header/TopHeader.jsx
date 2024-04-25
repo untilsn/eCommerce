@@ -5,19 +5,13 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../config/firebaseConfigure";
 import { Navigate } from "react-router-dom";
 const TopHeader = () => {
-  const [isLogin, setIsLogin] = useState("");
   const dispatch = useDispatch();
   const handleOpenModal = () => {
     dispatch(openModalAuth(true));
   };
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) setIsLogin(user.displayName);
-    });
-  }, []);
-
+  const { user } = useSelector((state) => state.auth);
   return (
-    <div className="flex items-center justify-between py-3 border-b border-gray">
+    <div className="flex items-center justify-between py-3 border-b border-gray border-opacity-30">
       <div className="flex items-center gap-2">
         <span>
           <svg
@@ -26,7 +20,7 @@ const TopHeader = () => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-6 h-6 text-secondary"
+            className="w-5 h-5 text-secondary"
           >
             <path
               strokeLinecap="round"
@@ -35,21 +29,21 @@ const TopHeader = () => {
             />
           </svg>
         </span>
-        <span className="text-lg text-textColor">Call: +0123 456 789</span>
+        <span className="text-sm text-textColor">Call: +0123 456 789</span>
       </div>
       {/* signin */}
-      {isLogin === "" || null ? (
+      {user?.displayName ? (
+        <div>
+          welcomback <span className="text-gray">{user?.displayName}</span>
+        </div>
+      ) : (
         <button
           onClick={handleOpenModal}
           href="#"
-          className="text-lg hover:text-yellow text-textColor"
+          className="text-sm hover:text-yellow text-textColor"
         >
           Sign in / Sign up
         </button>
-      ) : (
-        <div className="text-lg text-gray ">
-          welcome back <span className="text-white">{isLogin}</span>
-        </div>
       )}
     </div>
   );

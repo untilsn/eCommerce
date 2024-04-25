@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply font-body text-base leading-6 mx-auto;
+  @apply font-body text-sm leading-6 mx-auto;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -42,13 +42,13 @@ button {
 body {
   min-height: 100vh;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1;
 }
 
 .container {
   width: 100%;
-  max-width: 1440px;
+  max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
 }

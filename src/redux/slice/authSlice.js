@@ -1,19 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { auth } from "../../config/firebaseConfigure";
+import { auth, db } from "../../config/firebaseConfigure";
 import {
   createUserWithEmailAndPassword,
   updateProfile,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+import {
+  collection,
+  doc,
+  serverTimestamp,
+  setDoc,
+  updateDoc,
+} from "firebase/firestore";
 
 const authSlice = createSlice({
   name: "auth",
   initialState: {
-    user: {
-      email: null,
-      uid: null,
-      username: null,
-    },
+    user: null,
     error: null,
     isLoading: false,
     authModal: false,
@@ -37,13 +40,7 @@ const authSlice = createSlice({
     loginSuccess: (state, action) => {
       return {
         ...state,
-        isLoading: false,
-        user: {
-          ...state.user,
-          email: action.payload.email,
-          uid: action.payload.uid,
-          username: action.payload.displayName,
-        },
+        user: action.payload,
       };
     },
     loginFailure: (state, action) => {
@@ -66,12 +63,6 @@ const authSlice = createSlice({
       return {
         ...state,
         isLoading: false,
-        user: {
-          ...state.user,
-          email: action.payload.email,
-          uid: action.payload.uid,
-          username: action.payload.displayName,
-        },
       };
     },
     registerFailure: (state, action) => {
@@ -90,32 +81,6 @@ const authSlice = createSlice({
     },
   },
 });
-
-export const registerUser = (email, password, fullname) => async (dispatch) => {
-  try {
-    dispatch(registerStart());
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-    await updateProfile(auth.currentUser, {
-      displayName: fullname,
-    });
-    dispatch(
-      registerSuccess({
-        email: userCredential.user.email,
-        uid: userCredential.user.uid,
-        displayName: fullname,
-      })
-    );
-    // Đăng nhập người dùng sau khi đăng ký thành công
-    await signInWithEmailAndPassword(auth, email, password);
-  } catch (error) {
-    dispatch(registerFailure(error.message));
-  }
-};
-
 export const {
   openModalAuth,
   registerFailure,

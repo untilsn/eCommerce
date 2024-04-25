@@ -4,7 +4,6 @@ import HeaderBottom from "./HeaderBottom";
 import HeaderFeature from "../../utils/HeaderFeature";
 import DashboardFeature from "../../modules/headerFeature/DashboardFeature";
 import Banner from "../../modules/homepage/Banner";
-import { Outlet } from "react-router-dom";
 
 const Header = () => {
   return (

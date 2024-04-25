@@ -45,8 +45,8 @@ const Table = () => {
                   color="blue-gray"
                   className={
                     head === "product"
-                      ? "text-xl font-normal leading-none text-left capitalize text-dark "
-                      : "text-xl font-normal leading-none text-center capitalize text-dark "
+                      ? "text-sm font-normal leading-none text-left capitalize text-dark "
+                      : "text-sm font-normal leading-none text-center capitalize text-dark "
                   }
                 >
                   {head}
@@ -65,7 +65,7 @@ const Table = () => {
                   <Typography
                     variant="small"
                     color="blue-gray"
-                    className="text-xl font-normal"
+                    className="text-sm font-normal"
                   >
                     {name}
                   </Typography>
@@ -74,14 +74,14 @@ const Table = () => {
                   <Typography
                     variant="small"
                     color="blue-gray"
-                    className="text-xl font-normal text-center"
+                    className="text-sm font-normal text-center"
                   >
                     ${price}
                   </Typography>
                 </td>
                 <td className={classes}>
                   <Typography>
-                    <QuantityItem classname="max-w-[150px] text-xl mx-auto"></QuantityItem>
+                    <QuantityItem classname="max-w-[150px] text-sm mx-auto"></QuantityItem>
                   </Typography>
                 </td>
                 <td className={classes}>
@@ -90,7 +90,7 @@ const Table = () => {
                     href="#"
                     variant="small"
                     color="blue-gray"
-                    className="text-xl font-medium text-center text-yellow"
+                    className="text-sm font-medium text-center text-yellow"
                   >
                     Edit
                   </Typography>

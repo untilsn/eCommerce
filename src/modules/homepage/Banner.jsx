@@ -22,6 +22,7 @@ const Banner = () => {
           <SwiperSlide>
             <MainBanner
               img={mainBanner}
+              heading="Daily Deals"
               title="AirPods"
               subTitle="Earphones"
               price="$247"
@@ -34,6 +35,7 @@ const Banner = () => {
               title="Echo Dot"
               subTitle="3rd Gen"
               price="$29"
+              heading="Deals and Promotions"
               secondPrice="$49,99"
             ></MainBanner>
           </SwiperSlide>

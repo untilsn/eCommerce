@@ -9,20 +9,20 @@ const Breadcrumb = ({ children, url }) => {
         <Breadcrumbs className="p-0 py-3 capitalize bg-transparent ">
           <Link
             to="/"
-            className="py-1 text-xl font-normal hover:text-blue-800 hover:text-yellow text-opacity-80 text-dark"
+            className="py-1 text-sm font-normal hover:text-blue-800 hover:text-yellow text-opacity-80 text-dark"
           >
             Home
           </Link>
           <Link
             to={`/${children}`}
-            className="py-1 text-xl font-normal hover:text-blue-800 hover:text-yellow text-darkPrimary"
+            className="py-1 text-sm font-normal hover:text-blue-800 hover:text-yellow text-darkPrimary"
           >
             {children}
           </Link>
           {url ? (
             <Link
               to={`/${url}`}
-              className="py-1 text-xl font-normal hover:text-blue-800 hover:text-yellow text-darkPrimary"
+              className="py-1 text-sm font-normal hover:text-blue-800 hover:text-yellow text-darkPrimary"
             >
               {url}
             </Link>

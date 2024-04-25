@@ -16,7 +16,7 @@ const ShopPage = () => {
       <Breadcrumb children={shopName}></Breadcrumb>
       <div className="pt-10 border-t border-gray border-opacity-10">
         <div className="container">
-          <div className="grid grid-cols-[320px_minmax(0,_1fr)] gap-10">
+          <div className="grid grid-cols-[270px_minmax(0,_1fr)] gap-8 mb-20">
             <ShopCategory></ShopCategory>
             <ShopDisplay></ShopDisplay>
           </div>

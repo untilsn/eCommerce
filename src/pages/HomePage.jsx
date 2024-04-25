@@ -7,6 +7,7 @@ import BrandBanner from "../modules/homepage/BrandBanner";
 import TrendProduct from "../modules/homepage/TrendProduct";
 import SupportServicesBanner from "../modules/homepage/SupportServicesBanner";
 import FooterBanner from "../modules/homepage/footer/FooterBanner";
+import { auth } from "../config/firebaseConfigure";
 
 const HomePage = () => {
   return (

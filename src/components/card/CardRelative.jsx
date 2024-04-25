@@ -1,18 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaCartPlus, FaRegHeart } from "react-icons/fa";
 import { MdCompareArrows } from "react-icons/md";
 import { PiBinocularsBold } from "react-icons/pi";
+import { Link, NavLink } from "react-router-dom";
 
-const CardRelative = () => {
+const CardRelative = ({ item }) => {
+  const [cardHover, setCardHover] = useState(false);
   return (
-    <div className="overflow-hidden group hover:shadow-itemShadow">
+    <NavLink
+      to={`/product?id=${item.id}`}
+      onMouseEnter={() => setCardHover(true)}
+      onMouseLeave={() => setCardHover(false)}
+      className="overflow-hidden group hover:shadow-itemShadow"
+    >
       <div className="max-w-[400px] w-full relative overflow-hidden">
         <img
-          className="object-cover w-full h-full "
-          src="/public/item/shopitem.jpg"
+          className="object-contain w-full h-[340px] "
+          src={`${cardHover ? item.images[1] : item.images[0]}`}
           alt=""
         />
-        <ul className="absolute flex flex-col gap-3 text-lg top-4 right-4 transition-all opacity-0 group-hover:opacity-90 -translate-x-[50%] group-hover:translate-x-[5%]">
+        <ul className="absolute flex flex-col gap-3 text-sm top-4 right-4 transition-all opacity-0 group-hover:opacity-90 -translate-x-[50%] group-hover:translate-x-[5%]">
           <li className="p-3 bg-white rounded-full hover:bg-yellow hover:text-white text-yellow">
             <FaRegHeart />
           </li>
@@ -38,14 +45,14 @@ const CardRelative = () => {
         </div>
       </div>
       <div className="z-0 flex flex-col items-center gap-2 p-5 capitalize">
-        <h1 className="text-xl font-normal text-center">
-          Beige metal hoop tote bag
+        <h1 className="text-sm font-normal text-center text-black overflow-hidden overflow-ellipsis h-[30px]">
+          {item?.title}
         </h1>
-        <h2 className="text-xl font-normal text-center text-yellow">
-          $75.00–$80.00
+        <h2 className="text-sm font-normal text-center text-yellow">
+          ${item?.price}
         </h2>
       </div>
-    </div>
+    </NavLink>
   );
 };
 
