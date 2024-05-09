@@ -7,26 +7,26 @@ const MenuShop = () => {
         {/* 11 */}
         <div className="flex flex-col gap-4">
           <h1 className="text-[15px] font-normal uppercase">Shop List</h1>
-          <div className="text-[14px] font-light text-gray text-opacity-80 hover:text-yellow">
+          <div className="text-[14px] font-light text-gray text-opacity-80 hover:text-yellowColor">
             Shop grid column 2
           </div>
-          <div className="text-[14px] font-light text-gray text-opacity-80 hover:text-yellow">
+          <div className="text-[14px] font-light text-gray text-opacity-80 hover:text-yellowColor">
             Shop grid column 3
           </div>
-          <div className="text-[14px] font-light text-gray text-opacity-80 hover:text-yellow">
+          <div className="text-[14px] font-light text-gray text-opacity-80 hover:text-yellowColor">
             Shop grid column 4
           </div>
         </div>
         {/* 22 */}
         <div className="flex flex-col gap-4 mt-7">
           <h1 className="text-[15px] font-normal uppercase">shop pages</h1>
-          <div className="text-[14px] font-light text-gray text-opacity-80 hover:text-yellow">
+          <div className="text-[14px] font-light text-gray text-opacity-80 hover:text-yellowColor">
             carts
           </div>
-          <div className="text-[14px] font-light text-gray text-opacity-80 hover:text-yellow">
+          <div className="text-[14px] font-light text-gray text-opacity-80 hover:text-yellowColor">
             checkout
           </div>
-          <div className="text-[14px] font-light text-gray text-opacity-80 hover:text-yellow">
+          <div className="text-[14px] font-light text-gray text-opacity-80 hover:text-yellowColor">
             wishlist
           </div>
           <div className="text-[14px] font-light text-gray text-opacity-80">

@@ -13,7 +13,7 @@ const ButtonForm = ({
     <div>
       <button
         type={type}
-        className={`flex items-center justify-between w-full gap-2 p-3 text-sm uppercase transition-all duration-300 border-2 hover:bg-yellow group hover:text-light text-yellow border-yellow ${classname}`}
+        className={`flex items-center justify-between w-full gap-2 p-3 text-sm uppercase transition-all duration-300 border-2 hover:bg-yellowColor group hover:text-light text-yellowColor border-yellowColor ${classname}`}
       >
         {children}
         <span>
@@ -23,7 +23,7 @@ const ButtonForm = ({
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-6 h-6 text-yellow group-hover:text-light "
+            className="w-6 h-6 text-yellowColor group-hover:text-light "
           >
             <path
               strokeLinecap="round"

@@ -13,7 +13,7 @@ const MainBanner = ({ img, title, subTitle, price, secondPrice, heading }) => {
       }}
     >
       <div className="w-full py-10 px-20 h-[400px] inline-flex flex-col justify-center gap-4">
-        <h2 className="text-xl font-light text-yellow">{heading}</h2>
+        <h2 className="text-xl font-light text-yellowColor">{heading}</h2>
         <h1 className="text-5xl font-bold text-darkPrimary">
           {title} <br />
           {subTitle}
@@ -26,8 +26,10 @@ const MainBanner = ({ img, title, subTitle, price, secondPrice, heading }) => {
           >
             {secondPrice}
           </span>
-          <span className="text-5xl font-semibold text-yellow">{price}</span>
-          <span className="text-2xl font-semibold text-yellow">.99</span>
+          <span className="text-5xl font-semibold text-yellowColor">
+            {price}
+          </span>
+          <span className="text-2xl font-semibold text-yellowColor">.99</span>
         </p>
         <ButtonItem className="max-w-[180px] w-full justify-center mt-2 bg-opacity-95 hover:bg-warning">
           Click here

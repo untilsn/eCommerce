@@ -17,7 +17,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <ToastContainer
         position="top-center"
         theme="dark"
-        autoClose={2000}
+        autoClose={1000}
       ></ToastContainer>
     </BrowserRouter>
   </Provider>

@@ -4,6 +4,8 @@ import ShopDisplay from "../modules/shop/ShopDisplay";
 import ShopCategory from "../modules/shop/ShopCategory";
 import Breadcrumb from "../components/breadcrumb/Breadcrumb";
 import { useLocation, useParams, useSearchParams } from "react-router-dom";
+import { useFetchingProducts } from "../hooks/useFetchingProducts";
+import { useSelector } from "react-redux";
 
 const ShopPage = () => {
   const location = useLocation();

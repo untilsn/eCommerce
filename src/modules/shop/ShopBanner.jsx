@@ -12,7 +12,7 @@ const ShopBanner = ({ title = "list", subtitle = "shop" }) => {
     >
       <div className="text-center capitalize">
         <h1 className="text-4xl">{title}</h1>
-        <h2 className="mt-2 text-xl text-yellow">{subtitle}</h2>
+        <h2 className="mt-2 text-xl text-yellowColor">{subtitle}</h2>
       </div>
     </div>
   );

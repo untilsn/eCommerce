@@ -40,7 +40,7 @@ const TopHeader = () => {
         <button
           onClick={handleOpenModal}
           href="#"
-          className="text-sm hover:text-yellow text-textColor"
+          className="text-sm hover:text-yellowColor text-textColor"
         >
           Sign in / Sign up
         </button>

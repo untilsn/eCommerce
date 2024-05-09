@@ -76,7 +76,7 @@ const Register = () => {
             placeholder="enter you emaildress"
           ></InputForm>
           {errors ? (
-            <span className="text-redLite">{errors?.email?.message}</span>
+            <span className="text-redColor">{errors?.email?.message}</span>
           ) : (
             ""
           )}
@@ -90,7 +90,7 @@ const Register = () => {
           ></InputForm>
         </InputContaint>
         {errors ? (
-          <span className="text-redLite">{errors?.username?.message}</span>
+          <span className="text-redColor">{errors?.username?.message}</span>
         ) : (
           ""
         )}
@@ -103,7 +103,7 @@ const Register = () => {
             placeholder="enter you password"
           ></InputForm>
           {errors ? (
-            <span className="text-redLite">{errors?.password?.message}</span>
+            <span className="text-redColor">{errors?.password?.message}</span>
           ) : (
             ""
           )}
@@ -112,7 +112,7 @@ const Register = () => {
       {/* button submit */}
       <div className="flex items-center justify-between my-5">
         <ButtonForm type="submit">SIGN UP</ButtonForm>
-        <span className="text-sm capitalize hover:text-yellow">
+        <span className="text-sm capitalize hover:text-yellowColor">
           I agree to the privacy policy *
         </span>
       </div>

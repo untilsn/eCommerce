@@ -20,23 +20,23 @@ const CardRelative = ({ item }) => {
           alt=""
         />
         <ul className="absolute flex flex-col gap-3 text-sm top-4 right-4 transition-all opacity-0 group-hover:opacity-90 -translate-x-[50%] group-hover:translate-x-[5%]">
-          <li className="p-3 bg-white rounded-full hover:bg-yellow hover:text-white text-yellow">
+          <li className="p-3 bg-white rounded-full hover:bg-yellowColor hover:text-white text-yellowColor">
             <FaRegHeart />
           </li>
-          <li className="p-3 bg-white rounded-full hover:bg-yellow hover:text-white text-yellow">
+          <li className="p-3 bg-white rounded-full hover:bg-yellowColor hover:text-white text-yellowColor">
             <PiBinocularsBold />
           </li>
-          <li className="p-3 bg-white rounded-full hover:bg-yellow hover:text-white text-yellow">
+          <li className="p-3 bg-white rounded-full hover:bg-yellowColor hover:text-white text-yellowColor">
             <MdCompareArrows />
           </li>
         </ul>
         <div
           className="absolute bottom-0 left-0 right-0 transition-all flex items-center justify-center gap-5 p-4 uppercase bg-darkPrimary border-b border-gray border-opacity-20 text-white 
          opacity-0 group-hover:opacity-100 translate-y-[50%] group-hover:translate-y-[0]
-         hover:bg-yellow hover:text-white group/item 
+         hover:bg-yellowColor hover:text-white group/item 
          "
         >
-          <span className="text-yellow group-hover/item:text-white">
+          <span className="text-yellowColor group-hover/item:text-white">
             <FaCartPlus />
           </span>
           <span className="text-white group-hover/item:text-white">
@@ -48,7 +48,7 @@ const CardRelative = ({ item }) => {
         <h1 className="text-sm font-normal text-center text-black overflow-hidden overflow-ellipsis h-[30px]">
           {item?.title}
         </h1>
-        <h2 className="text-sm font-normal text-center text-yellow">
+        <h2 className="text-sm font-normal text-center text-yellowColor">
           ${item?.price}
         </h2>
       </div>

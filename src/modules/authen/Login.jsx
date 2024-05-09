@@ -77,7 +77,7 @@ const Login = () => {
             placeholder="enter you username"
           ></InputForm>
           {errors ? (
-            <span className="mt-2 text-redLite">{errors?.email?.message}</span>
+            <span className="mt-2 text-redColor">{errors?.email?.message}</span>
           ) : (
             ""
           )}
@@ -91,7 +91,7 @@ const Login = () => {
             placeholder="enter you password"
           ></InputForm>
           {errors ? (
-            <span className="mt-2 text-redLite">
+            <span className="mt-2 text-redColor">
               {errors?.password?.message}
             </span>
           ) : (
@@ -102,7 +102,7 @@ const Login = () => {
       {/* button submit */}
       <div className="flex items-center justify-between my-5">
         <ButtonForm type="submit">LOG IN</ButtonForm>
-        <span className="text-sm capitalize hover:text-yellow">
+        <span className="text-sm capitalize hover:text-yellowColor">
           forget password
         </span>
       </div>

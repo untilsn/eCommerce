@@ -1,9 +1,11 @@
-import React from "react";
+import React, { Fragment, useState } from "react";
 import DashboardHeading from "../../modules/dashboard/DashboardHeading";
 import ActionView from "../../components/action/ActionView";
 import ActionEdit from "../../components/action/ActionEdit";
 import ActionDelete from "../../components/action/ActionDelete";
 import { Chip, Typography, Card } from "@material-tailwind/react";
+import { useDataFetcher } from "../../hooks/useFetchData";
+import { useSelector } from "react-redux";
 const TABLE_HEAD = [
   "id",
   "product",
@@ -12,71 +14,37 @@ const TABLE_HEAD = [
   "status",
   "action",
 ];
-const TABLE_ROWS = [
-  {
-    img: "https://docs.material-tailwind.com/img/logos/logo-spotify.svg",
-    name: "Spotify",
-    amount: "$2,500",
-    date: "Wed 3:00pm",
-    status: "paid",
-    account: "visa",
-    accountNumber: "1234",
-    expiry: "06/2026",
-  },
-  {
-    img: "https://docs.material-tailwind.com/img/logos/logo-amazon.svg",
-    name: "Amazon",
-    amount: "$5,000",
-    date: "Wed 1:00pm",
-    status: "paid",
-    account: "master-card",
-    accountNumber: "1234",
-    expiry: "06/2026",
-  },
-  {
-    img: "https://docs.material-tailwind.com/img/logos/logo-pinterest.svg",
-    name: "Pinterest",
-    amount: "$3,400",
-    date: "Mon 7:40pm",
-    status: "pending",
-    account: "master-card",
-    accountNumber: "1234",
-    expiry: "06/2026",
-  },
-  {
-    img: "https://docs.material-tailwind.com/img/logos/logo-google.svg",
-    name: "Google",
-    amount: "$1,000",
-    date: "Wed 5:00pm",
-    status: "paid",
-    account: "visa",
-    accountNumber: "1234",
-    expiry: "06/2026",
-  },
-  {
-    img: "https://docs.material-tailwind.com/img/logos/logo-netflix.svg",
-    name: "netflix",
-    amount: "$14,000",
-    date: "Wed 3:30am",
-    status: "cancelled",
-    account: "visa",
-    accountNumber: "1234",
-    expiry: "06/2026",
-  },
-];
+
 const DashboardProduct = () => {
+  const { products } = useSelector((state) => state.store);
+  const [searchTerm, setSearchTerm] = useState("");
+  const filterProducts = products.filter((product) =>
+    product.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
   return (
-    <div className="px-10">
-      <DashboardHeading>Manage Product</DashboardHeading>
+    <Fragment>
+      <div className="flex items-center justify-between">
+        <DashboardHeading>Manage Product</DashboardHeading>
+        <input
+          type="search"
+          placeholder="seach products"
+          className="p-3 bg-transparent focus:border-warning max-w-[300px] w-full  border border-darkPrimary border-opacity-75 rounded-md outline-none"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
       <Card shadow={false} className="w-full h-full mt-10">
         <table className="w-full text-left min-w-max">
           <thead className="">
             <tr>
               {TABLE_HEAD.map((head) => (
-                <th key={head} className="py-4 border-b border-blue-gray-100">
+                <th
+                  key={head}
+                  className="py-4 border-b border-blueColor-gray-100"
+                >
                   <Typography
                     variant="small"
-                    color="blue-gray"
+                    color="blueColor-gray"
                     className={
                       head === "product"
                         ? "text-sm  leading-none text-left  font-medium capitalize text-dark "
@@ -90,11 +58,11 @@ const DashboardProduct = () => {
             </tr>
           </thead>
           <tbody>
-            {TABLE_ROWS.map(({ status }, item, index) => {
-              const isLast = index === TABLE_ROWS.length - 1;
+            {filterProducts.map((item, index) => {
+              const isLast = index === products.length - 1;
               const classes = isLast
                 ? "p-4"
-                : "p-4 border-b border-blue-gray-50";
+                : "p-4 border-b border-blueColor-gray-50";
               return (
                 <tr
                   key={item.id}
@@ -103,31 +71,41 @@ const DashboardProduct = () => {
                   <td className="p-4">
                     <Typography
                       variant="small"
-                      color="blue-gray"
+                      color="blueColor-gray"
                       className="text-sm font-normal"
+                      title={item?.id}
                     >
-                      5UzBL
+                      {item?.id.slice(0, 5) + "..."}
                     </Typography>
                   </td>
-                  <td className="py-4">
+                  <td className="py-4 w-[500px]">
                     <Typography
                       variant="small"
-                      color="blue-gray"
-                      className="text-sm font-normal"
+                      color="blueColor-gray"
+                      className="text-sm font-normal w-[500px]"
                     >
-                      <span className="flex items-center gap-3">
+                      <span className="flex items-center justify-start gap-3 max-w-[500px]">
                         <span className="max-w-[150px] w-full  h-[100px]">
                           <img
-                            className="object-cover w-full h-full rounded"
-                            src="/public/productItem/mainImg.jpg"
-                            alt="product"
+                            className="object-contain w-full h-full rounded"
+                            src={item?.images[0]}
+                            alt={item?.category}
                           />
                         </span>
-                        <span className="flex flex-col gap-1">
-                          <span className="font-medium">
-                            ki vay ta how the fuck not work
+                        <span className="flex flex-col justify-start gap-1">
+                          <span
+                            className="font-medium overflow-hidden overflow-ellipsis h-[40px] max-w-[300px]"
+                            style={
+                              {
+                                // textOverflow: "ellipsis",
+                                // whiteSpace: "nowrap",
+                              }
+                            }
+                            title={item?.title}
+                          >
+                            {item?.title}
                           </span>
-                          <span>Date: 15/12/2023</span>
+                          <span>Date: {item?.createAt}</span>
                         </span>
                       </span>
                     </Typography>
@@ -135,19 +113,19 @@ const DashboardProduct = () => {
                   <td>
                     <Typography
                       variant="small"
-                      color="blue-gray"
+                      color="blueColor-gray"
                       className="text-sm font-normal text-center"
                     >
                       <span className="flex flex-col gap-1">
-                        <span>computer</span>
-                        <span>129</span>
+                        <span>{item?.category}</span>
+                        <span>{item?.stock}</span>
                       </span>
                     </Typography>
                   </td>
                   <td>
                     <Typography
                       variant="small"
-                      color="blue-gray"
+                      color="blueColor-gray"
                       className="text-sm font-normal"
                     >
                       <span>John Michael</span>
@@ -158,9 +136,9 @@ const DashboardProduct = () => {
                       <Chip
                         size="lg"
                         variant="ghost"
-                        value={status}
+                        value="APPROVED"
                         color={
-                          status === "paid"
+                          status === ""
                             ? "green"
                             : status === "pending"
                             ? "amber"
@@ -172,7 +150,7 @@ const DashboardProduct = () => {
                   <td>
                     <Typography
                       variant="small"
-                      color="blue-gray"
+                      color="blueColor-gray"
                       className="text-sm font-normal"
                     >
                       <span className="flex items-center justify-center gap-3">
@@ -188,7 +166,7 @@ const DashboardProduct = () => {
           </tbody>
         </table>
       </Card>
-    </div>
+    </Fragment>
   );
 };
 

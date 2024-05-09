@@ -8,8 +8,10 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/scrollbar";
 import { v4 } from "uuid";
+import { useSelector } from "react-redux";
 
 const TrendProduct = () => {
+  const { products } = useSelector((state) => state.store);
   return (
     <div>
       <TitlePath>Trending Products</TitlePath>
@@ -21,14 +23,17 @@ const TrendProduct = () => {
           slidesPerView={4}
           navigation
           pagination={{ clickable: true }}
+          className="h-[360px]"
         >
-          {Array(5)
-            .fill(0)
-            .map((item) => (
-              <SwiperSlide key={v4()}>
-                <CardItem></CardItem>
-              </SwiperSlide>
-            ))}
+          {products.map((item) => (
+            <SwiperSlide key={v4()}>
+              <CardItem
+                classes="!h-[200px]"
+                key={item.id}
+                item={item}
+              ></CardItem>
+            </SwiperSlide>
+          ))}
         </Swiper>
       </div>
     </div>

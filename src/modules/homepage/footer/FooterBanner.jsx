@@ -26,7 +26,7 @@ const FooterBanner = () => {
             {FooterIconContact.map((item) => (
               <span
                 key={item.id}
-                className="inline-flex items-center justify-center p-4 text-2xl text-white rounded-full bg-purple"
+                className={`${item.bg} inline-flex items-center justify-center p-4 text-lg text-white rounded-full`}
               >
                 {item.icon}
               </span>
@@ -42,19 +42,19 @@ const FooterBanner = () => {
             and
           </span>
           <p className="text-sm font-normal text-gray text-opacity-60">
-            receive <span className="text-yellow">$20 coupon</span> for first
-            shopping
+            receive <span className="text-yellowColor">$20 coupon</span> for
+            first shopping
           </p>
           {/* input */}
           <div className="input-group inline-flex max-w-[400px] w-full items-center border border-gray border-opacity-40 mt-10 rounded-full ">
             <input
               type="email"
-              className="w-full px-5 py-3 bg-transparent border-none rounded-l-full outline-none form-control"
+              className="w-full px-5 py-3 bg-transparent border-none rounded-l-full form-control"
               placeholder="Enter your Email Address"
               aria-label="Email Adress"
               required=""
             />
-            <div className="px-6 py-4 rounded-r-full input-group-append bg-yellow">
+            <div className="px-6 py-4 rounded-r-full input-group-append bg-yellowColor">
               <button
                 className="text-white btn btn-primary btn-rounded"
                 type="submit"

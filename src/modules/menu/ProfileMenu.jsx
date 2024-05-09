@@ -5,6 +5,7 @@ import { logout } from "../../redux/slice/authSlice";
 import { toast } from "react-toastify";
 import { auth } from "../../config/firebaseConfigure";
 import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
+import { displayCart, displayWishlist } from "../../redux/slice/storeSlice";
 
 const ProfileMenu = () => {
   const dispatch = useDispatch();
@@ -13,6 +14,8 @@ const ProfileMenu = () => {
     auth.signOut();
     dispatch(logout());
     navigate("/");
+    dispatch(displayWishlist([]));
+    dispatch(displayCart([]));
     toast.success("logout done");
   };
 
@@ -21,7 +24,7 @@ const ProfileMenu = () => {
       <div className="flex flex-col w-full gap-3">
         <Link
           to="/manage"
-          className="flex items-center justify-between w-full text-sm hover:text-yellow text-gray text-opacity-90"
+          className="flex items-center justify-between w-full text-sm hover:text-yellowColor text-gray text-opacity-90"
         >
           <span>manage</span>
           <span>
@@ -30,7 +33,7 @@ const ProfileMenu = () => {
         </Link>
         <div
           onClick={handleLogout}
-          className="flex items-center justify-between w-full text-sm hover:text-yellow text-grayDark "
+          className="flex items-center justify-between w-full text-sm hover:text-yellowColor text-grayDark "
         >
           <span>logout</span>
           <span>

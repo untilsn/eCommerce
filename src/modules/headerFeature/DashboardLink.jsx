@@ -1,3 +1,4 @@
+import BlogPage from "../../pages/BlogPage";
 import MenuCart from "../menu/MenuCart";
 import MenuShop from "../menu/MenuShop";
 import ProductMenu from "../menu/ProductMenu";
@@ -30,6 +31,7 @@ export const dashboardLink = [
     name: "blogs",
     url: "/blogs",
     hover: false,
+    // menu: <BlogPage></BlogPage>,
   },
   {
     name: "profile",

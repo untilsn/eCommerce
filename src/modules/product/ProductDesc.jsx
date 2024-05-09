@@ -11,9 +11,9 @@ const ProductDesc = ({ item }) => {
       <div className="flex items-center justify-center gap-10">
         <div
           onClick={() => setTabs("review")}
-          className={`py-3 px-4 text-lg capitalize border-b-2 border-transparent hover:text-yellow hover:border-b-2 hover:border-yellow ${
+          className={`py-3 px-4 text-lg capitalize border-b-2 border-transparent hover:text-yellowColor hover:border-b-2 hover:border-yellowColor ${
             tabs === "review"
-              ? "text-yellow border-b-2 border-yellow"
+              ? "text-yellowColor border-b-2 border-yellowColor"
               : "text-dark "
           }`}
         >
@@ -22,9 +22,9 @@ const ProductDesc = ({ item }) => {
 
         <div
           onClick={() => setTabs("description")}
-          className={`py-3 px-4 text-lg capitalize border-b-2 border-transparent hover:text-yellow hover:border-b-2 hover:border-yellow ${
+          className={`py-3 px-4 text-lg capitalize border-b-2 border-transparent hover:text-yellowColor hover:border-b-2 hover:border-yellowColor ${
             tabs === "description"
-              ? "text-yellow border-b-2 border-yellow"
+              ? "text-yellowColor border-b-2 border-yellowColor"
               : "text-dark "
           }`}
         >
@@ -32,9 +32,9 @@ const ProductDesc = ({ item }) => {
         </div>
         <div
           onClick={() => setTabs("rule")}
-          className={`py-3 px-4 text-lg capitalize border-b-2 border-transparent hover:text-yellow hover:border-b-2 hover:border-yellow ${
+          className={`py-3 px-4 text-lg capitalize border-b-2 border-transparent hover:text-yellowColor hover:border-b-2 hover:border-yellowColor ${
             tabs === "rule"
-              ? "text-yellow border-b-2 border-yellow"
+              ? "text-yellowColor border-b-2 border-yellowColor"
               : "text-dark "
           }`}
         >

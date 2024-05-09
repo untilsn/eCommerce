@@ -7,8 +7,10 @@ import { Navigation, Scrollbar, A11y } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/scrollbar";
+import { useSelector } from "react-redux";
 
 const ShopReview = () => {
+  const { products } = useSelector((state) => state.store);
   return (
     <div>
       <ShopNavigation></ShopNavigation>
@@ -20,13 +22,11 @@ const ShopReview = () => {
           navigation
           pagination={{ clickable: true }}
         >
-          {Array(5)
-            .fill(0)
-            .map((item) => (
-              <SwiperSlide key={v4()}>
-                <CardItem></CardItem>
-              </SwiperSlide>
-            ))}
+          {products.map((item) => (
+            <SwiperSlide key={v4()}>
+              <CardItem item={item}></CardItem>
+            </SwiperSlide>
+          ))}
         </Swiper>
       </div>
     </div>

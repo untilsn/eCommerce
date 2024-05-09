@@ -8,6 +8,7 @@ import TrendProduct from "../modules/homepage/TrendProduct";
 import SupportServicesBanner from "../modules/homepage/SupportServicesBanner";
 import FooterBanner from "../modules/homepage/footer/FooterBanner";
 import { auth } from "../config/firebaseConfigure";
+import { useSelector } from "react-redux";
 
 const HomePage = () => {
   return (

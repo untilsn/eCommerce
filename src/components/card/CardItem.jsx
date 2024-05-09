@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { v4 } from "uuid";
 import { FaCartPlus } from "react-icons/fa";
 import { BiSolidBinoculars } from "react-icons/bi";
 import { FaRegHeart } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export const ReviewIcon = () => {
   return (
@@ -10,7 +11,7 @@ export const ReviewIcon = () => {
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       fill="currentColor"
-      className="w-4 h-4 text-yellow"
+      className="w-4 h-4 text-yellowColor"
     >
       <path
         fillRule="evenodd"
@@ -21,40 +22,70 @@ export const ReviewIcon = () => {
   );
 };
 
-const CardItem = () => {
+const CardItem = ({ item, classes }) => {
+  const [isHover, setIsHover] = useState(false);
+  const handleHoverImage = () => {
+    setIsHover(true);
+  };
+  const handleNotHoverImage = () => {
+    setIsHover(false);
+  };
   return (
-    <div className="z-0 group relative max-w-[400px] w-full h-[500px] border border-gray border-opacity-15 bg-light">
-      <div className="relative overflow-hidden -z-20">
-        <img
-          className="w-full h-[276px] object-cover"
-          src="/item/itemcard1.jpg"
-          alt=""
-        />
+    <div
+      onMouseEnter={handleHoverImage}
+      onMouseLeave={handleNotHoverImage}
+      className={`group hover:shadow-itemShadow relative max-w-[370px] w-full h-[450px] border border-gray border-opacity-15 bg-white ${classes}`}
+    >
+      <div className="relative w-full overflow-hidden ">
+        <Link to={`/product?id=${item?.id}`}>
+          <div
+            className={`relative w-full h-[276px] overflow-hidden ${classes}`}
+          >
+            {/* Ảnh khi isHover false */}
+            <img
+              className={`absolute top-0 left-0 w-full h-full object-contain ${
+                isHover ? "opacity-0 transition-all duration-0" : "opacity-100"
+              } ${item.category === "unknown" ? "blur-xl" : ""}`}
+              src={item?.images[0]}
+              alt=""
+            />
+            {/* Ảnh khi isHover true */}
+            <img
+              className={`absolute top-0  left-0 w-full h-full object-contain ${
+                isHover
+                  ? "opacity-100"
+                  : "opacity-0 transition-all  duration-[300ms]"
+              }`}
+              src={item?.images[1]}
+              alt=""
+            />
+          </div>
+        </Link>
         {/* Heart icon */}
-        <div className="absolute p-3 rounded-full right-6 top-6 bg-yellow transition-all opacity-0 group-hover:opacity-90 -translate-x-[50%] group-hover:translate-x-[5%] ">
+        <div className="absolute p-3 rounded-full right-6 top-6 bg-yellowColor transition-all opacity-0 group-hover:opacity-90 -translate-x-[50%] group-hover:translate-x-[5%] ">
           <FaRegHeart />
         </div>
         {/* Cart and Binoculars icons */}
         <div
-          className="absolute z-0 bottom-0 left-0 right-0  text-sm flex items-center justify-evenly h-[50px] bg-darkPrimary text-light 
+          className="absolute -bottom-1 left-0 right-0  text-base flex items-center justify-evenly h-[50px] bg-darkPrimary text-light 
           translate-y-[100%]  group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all"
         >
           <div>
-            <FaCartPlus className="hover:text-yellow" />
+            <FaCartPlus className="hover:text-yellowColor" />
           </div>
           <hr className="h-[60%] w-[1px] bg-white" />
           <div>
-            <BiSolidBinoculars className="hover:text-yellow" />
+            <BiSolidBinoculars className="hover:text-yellowColor" />
           </div>
         </div>
       </div>
       {/* Content */}
-      <div className="flex flex-col gap-2 p-5 bg-light">
-        <div className="capitalize text-gray">apple,watch</div>
-        <h1 className="text-sm">
-          Apple – Watch Series 3 with White Sport Band
+      <div className="flex flex-col gap-2 p-5 bg-white ">
+        <div className="capitalize text-gray">{item?.category}</div>
+        <h1 className="overflow-hidden text-base overflow-ellipsis h-[50px]">
+          {item?.title}
         </h1>
-        <h2 className="text-sm text-yellow">$22.4</h2>
+        <h2 className="text-base text-yellowColor">${item?.price}</h2>
         <div className="flex items-center gap-5">
           <div className="flex items-center gap-1">
             {Array(5)
@@ -64,7 +95,7 @@ const CardItem = () => {
               ))}
           </div>
           <span className="capitalize text-gray text-opacity-60">
-            (2 reviews)
+            ({item?.reviews?.length} reviews)
           </span>
         </div>
       </div>

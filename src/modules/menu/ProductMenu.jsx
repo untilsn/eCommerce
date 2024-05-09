@@ -11,25 +11,25 @@ const ProductMenu = () => {
             <h1 className="text-[15px] font-normal uppercase">
               PRODUCT DETAILS
             </h1>
-            <div className="text-sm font-light text-gray text-opacity-90 hover:text-yellow">
+            <div className="text-sm font-light text-gray text-opacity-90 hover:text-yellowColor">
               Default
             </div>
-            <div className="text-sm font-light text-gray text-opacity-90 hover:text-yellow">
+            <div className="text-sm font-light text-gray text-opacity-90 hover:text-yellowColor">
               Centered
             </div>
-            <div className="text-sm font-light text-gray text-opacity-90 hover:text-yellow">
+            <div className="text-sm font-light text-gray text-opacity-90 hover:text-yellowColor">
               Extended InfoNEW
             </div>
-            <div className="text-sm font-light text-gray text-opacity-90 hover:text-yellow">
+            <div className="text-sm font-light text-gray text-opacity-90 hover:text-yellowColor">
               Gallery
             </div>
-            <div className="text-sm font-light text-gray text-opacity-90 hover:text-yellow">
+            <div className="text-sm font-light text-gray text-opacity-90 hover:text-yellowColor">
               Sticky Info
             </div>
-            <div className="text-sm font-light text-gray text-opacity-90 hover:text-yellow">
+            <div className="text-sm font-light text-gray text-opacity-90 hover:text-yellowColor">
               Boxed With Sidebar
             </div>
-            <div className="text-sm font-light text-gray text-opacity-90 hover:text-yellow">
+            <div className="text-sm font-light text-gray text-opacity-90 hover:text-yellowColor">
               Full Width
             </div>
           </div>

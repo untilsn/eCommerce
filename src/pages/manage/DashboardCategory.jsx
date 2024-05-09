@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import DashboardHeading from "../../modules/dashboard/DashboardHeading";
 import ActionView from "../../components/action/ActionView";
 import ActionEdit from "../../components/action/ActionEdit";
@@ -59,17 +59,20 @@ const TABLE_ROWS = [
 ];
 const DashboardCategory = () => {
   return (
-    <div className="px-10">
+    <Fragment>
       <DashboardHeading>Manage Product</DashboardHeading>
       <Card shadow={false} className="w-full h-full mt-10">
         <table className="w-full text-left min-w-max">
           <thead className="">
             <tr>
               {TABLE_HEAD.map((head) => (
-                <th key={head} className="p-4 border-b border-blue-gray-100">
+                <th
+                  key={head}
+                  className="p-4 border-b border-blueColor-gray-100"
+                >
                   <Typography
                     variant="small"
-                    color="blue-gray"
+                    color="blueColor-gray"
                     className={
                       head === "product"
                         ? "text-sm  leading-none text-left  font-medium capitalize text-dark "
@@ -87,7 +90,7 @@ const DashboardCategory = () => {
               const isLast = index === TABLE_ROWS.length - 1;
               const classes = isLast
                 ? "p-4"
-                : "p-4 border-b border-blue-gray-50";
+                : "p-4 border-b border-blueColor-gray-50";
               return (
                 <tr
                   key={item.id}
@@ -96,7 +99,7 @@ const DashboardCategory = () => {
                   <td className="p-4">
                     <Typography
                       variant="small"
-                      color="blue-gray"
+                      color="blueColor-gray"
                       className="text-sm font-normal"
                     >
                       5UzBL
@@ -105,7 +108,7 @@ const DashboardCategory = () => {
                   <td className="p-4">
                     <Typography
                       variant="small"
-                      color="blue-gray"
+                      color="blueColor-gray"
                       className="text-sm font-normal"
                     >
                       <span>namee</span>
@@ -114,7 +117,7 @@ const DashboardCategory = () => {
                   <td className="p-4">
                     <Typography
                       variant="small"
-                      color="blue-gray"
+                      color="blueColor-gray"
                       className="text-sm font-normal "
                     >
                       <span>computer</span>
@@ -140,7 +143,7 @@ const DashboardCategory = () => {
                   <td className="p-4">
                     <Typography
                       variant="small"
-                      color="blue-gray"
+                      color="blueColor-gray"
                       className="text-sm font-normal"
                     >
                       <span className="flex items-center justify-start gap-3">
@@ -156,7 +159,7 @@ const DashboardCategory = () => {
           </tbody>
         </table>
       </Card>
-    </div>
+    </Fragment>
   );
 };
 

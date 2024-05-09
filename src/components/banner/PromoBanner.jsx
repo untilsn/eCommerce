@@ -15,7 +15,7 @@ const PromoBanner = () => {
       >
         <div className="bg-white p-5 w-full h-[140px] flex items-center justify-center gap-x-20">
           <div className="text-2xl font-semibold text-end">
-            <span className="text-yellow">New Deals</span>
+            <span className="text-yellowColor">New Deals</span>
             <div>Start Daily at 12pm e.t.</div>
           </div>
           <div className="text-sm text-gray max-w-[440px] w-full ">

@@ -32,12 +32,11 @@ input,
 select,
 textarea {
   background-color: transparent;
-  outline: none;
 }
 button {
   cursor: pointer;
   background-color: transparent;
-  outline: none;
+  // outline: none;
 }
 body {
   min-height: 100vh;
@@ -57,7 +56,7 @@ button,
 input,
 select,
 textarea {
-  transition: color 0.3s ease, font-size 0.3s ease;
+  @apply transition-all outline-none;
 }
 .border_primary {
   @apply border border-gray border-opacity-20;
@@ -79,4 +78,8 @@ textarea {
   padding: 16px;
   color: #232324;
   @apply text-2xl bg-transparent;
+}
+
+.quill .ql-editor {
+  @apply min-h-[150px];
 }

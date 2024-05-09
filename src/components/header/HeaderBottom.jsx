@@ -14,7 +14,7 @@ const HeaderBottom = () => {
         />
       </a>
       <SearchInput></SearchInput>
-      <div className="flex items-center justify-end gap-7">
+      <div className="flex items-center justify-end ">
         {iconHeaderList.map((item) => (
           <HeaderFeature item={item} key={item.title} icon={item.icon}>
             {item.title}

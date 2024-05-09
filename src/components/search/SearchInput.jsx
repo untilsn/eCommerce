@@ -22,7 +22,7 @@ const SearchInput = () => {
       <input
         placeholder="Search product..."
         type="search"
-        className="w-full h-full p-3 bg-transparent border-none outline-none"
+        className="w-full h-full p-3 bg-transparent border-none "
       ></input>
     </div>
   );

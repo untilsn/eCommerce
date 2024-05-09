@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaCartPlus, FaMinus } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa6";
 import { CiHeart } from "react-icons/ci";
@@ -12,6 +12,9 @@ import QuantityItem from "../../components/quantity/QuantityItem";
 const ProductDetail = ({ item }) => {
   if (!item) return null;
   const [image, setImage] = useState(item.images?.[0]);
+  useEffect(() => {
+    document.body.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, []);
   return (
     <div className="grid grid-cols-2 mt-10 mb-20 gap-7">
       {/* show image */}
@@ -22,7 +25,7 @@ const ProductDetail = ({ item }) => {
               onClick={() => setImage(img)}
               key={v4()}
               className={`${
-                image === img ? "border border-yellow" : ""
+                image === img ? "border border-yellowColor" : ""
               } max-w-[100px] w-full h-[100px] `}
             >
               <img className="object-cover w-full h-full " src={img} alt="" />
@@ -52,7 +55,7 @@ const ProductDetail = ({ item }) => {
             ( {item?.reviews?.length} reviews )
           </span>
         </div>
-        <h2 className="text-3xl font-normal text-yellow">${item.price}</h2>
+        <h2 className="text-3xl font-normal text-yellowColor">${item.price}</h2>
         <p className="text-sm font-light text-gray text-opacity-80">
           {item.desc}
         </p>
@@ -73,7 +76,7 @@ const ProductDetail = ({ item }) => {
         </div>
         {/* add and wishlist */}
         <div className="flex items-center gap-10 mb-5">
-          <div className="flex items-center justify-center gap-5 p-4 uppercase bg-white border border-gray border-opacity-20 text-yellow max-w-[250px] w-full  hover:bg-yellow hover:text-white">
+          <div className="flex items-center justify-center gap-5 p-4 uppercase bg-white border border-gray border-opacity-20 text-yellowColor max-w-[250px] w-full  hover:bg-yellowColor hover:text-white">
             <span>
               <FaCartPlus />
             </span>
@@ -81,9 +84,9 @@ const ProductDetail = ({ item }) => {
           </div>
           <div className="flex items-center gap-5 text-sm">
             <span>
-              <CiHeart className="text-yellow" />
+              <CiHeart className="text-yellowColor" />
             </span>
-            <span className="hover:text-yellow hover:underline">
+            <span className="hover:text-yellowColor hover:underline">
               Add to Wishlist
             </span>
           </div>

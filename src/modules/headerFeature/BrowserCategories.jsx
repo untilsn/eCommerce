@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 import { IoIosMenu } from "react-icons/io";
 import { IoMdClose } from "react-icons/io";
+import { v4 } from "uuid";
 
-export const categoryList = ["computer", "sextoi", "pillowwaifu"];
-
-const BrowserCategories = () => {
+const BrowserCategories = ({ category }) => {
   const [hovered, setHovered] = useState(false);
 
   return (
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="relative flex items-center justify-between h-full gap-3 px-4 text-black transition-all border-r border-gray border-opacity-10 hover:bg-yellow group"
+      className="relative flex items-center justify-between h-full gap-3 px-4 text-black transition-all border-r border-gray border-opacity-10 hover:bg-yellowColor group"
     >
       <div className="flex items-center gap-3">
         <span className="py-3 text-3xl text-opacity-90 text-dark ">
@@ -45,12 +44,12 @@ const BrowserCategories = () => {
       {/* categori */}
       {hovered ? (
         <div className="absolute top-[100%] left-0 right-0 bg-white shadow-lg">
-          {categoryList.map((item, index) => (
+          {category.map((item) => (
             <div
-              key={index}
+              key={v4()}
               className="p-5 text-sm capitalize hover:bg-gray hover:bg-opacity-5 text-dark border-b_primary"
             >
-              {item}
+              {item?.name}
             </div>
           ))}
         </div>

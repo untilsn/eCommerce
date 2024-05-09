@@ -43,8 +43,8 @@ const AuthenModal = () => {
             onClick={() => setIsLogin("login")}
             className={`${
               isLogin === "login"
-                ? " border-b  border-yellow"
-                : " hover:text-yellow"
+                ? " border-b  border-yellowColor"
+                : " hover:text-yellowColor"
             } flex-1 p-4 text-2xl text-center`}
           >
             Login
@@ -53,8 +53,8 @@ const AuthenModal = () => {
             onClick={() => setIsLogin("register")}
             className={`${
               isLogin === "register"
-                ? " border-b  border-yellow"
-                : " hover:text-yellow"
+                ? " border-b  border-yellowColor"
+                : " hover:text-yellowColor"
             } flex-1 p-4 text-2xl text-center`}
           >
             Register
