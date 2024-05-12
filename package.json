@@ -28,6 +28,7 @@
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
     "sass": "^1.72.0",
+    "slugify": "^1.6.6",
     "swiper": "^11.1.0",
     "uuid": "^9.0.1",
     "yup": "^1.4.0"

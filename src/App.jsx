@@ -43,9 +43,12 @@ function App() {
     const categoryRef = collection(db, "categories");
     onSnapshot(categoryRef, (snapshot) => {
       let result = [];
+      console.log(result);
       snapshot.forEach((category) => {
-        const docData = category.data();
-        result.push(docData);
+        result.push({
+          id: category.id,
+          ...category.data(),
+        });
       });
       dispatch(displayCategories(result));
     });

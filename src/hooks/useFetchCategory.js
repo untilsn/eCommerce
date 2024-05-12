@@ -24,17 +24,14 @@ export function useFetchCategory(category) {
 
         onSnapshot(q, (snapshot) => {
           let result = [];
+          console.log(result);
           snapshot.forEach((doc) => {
             result.push({
               id: doc.id,
               ...doc.data(),
             });
           });
-          const formattedResult = result.map((item) => {
-            return { ...item, createAt: useFormatDate(item) };
-          });
-
-          dispatch(displayCategoryProducts(formattedResult));
+          dispatch(displayCategoryProducts(result));
         });
       }
       fetchData();
