@@ -12,14 +12,18 @@ import { db } from "../config/firebaseConfigure";
 import { useSelector } from "react-redux";
 export function useAddProduct() {
   const { user } = useSelector((state) => state.auth);
+
   const handleAddItem = async (item, type) => {
+    if (!user) {
+      toast.error("You must be login to add products..");
+    }
     try {
       const docRef = collection(db, type);
       const unsubscribe = await getDocs(
         query(
           docRef,
           where("userId", "==", user?.uid),
-          where("productId", "==", item?.id)
+          where("productId", "==", item?.productId)
         )
       );
       if (unsubscribe.size > 0) {
@@ -30,7 +34,7 @@ export function useAddProduct() {
       const wishlistDocRef = collection(db, type);
       addDoc(wishlistDocRef, {
         userId: user.uid,
-        productId: item.id,
+        productId: item.productId,
         timeAdded: serverTimestamp(),
         category: item.category,
       })

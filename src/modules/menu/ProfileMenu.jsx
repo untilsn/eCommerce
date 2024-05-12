@@ -6,16 +6,18 @@ import { toast } from "react-toastify";
 import { auth } from "../../config/firebaseConfigure";
 import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import { displayCart, displayWishlist } from "../../redux/slice/storeSlice";
+import { signOut } from "firebase/auth";
 
 const ProfileMenu = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogout = () => {
-    auth.signOut();
-    dispatch(logout());
-    navigate("/");
-    dispatch(displayWishlist([]));
+    signOut(auth);
+    console.log("logout");
+    dispatch(logout(null));
     dispatch(displayCart([]));
+    dispatch(displayWishlist([]));
+    navigate("/");
     toast.success("logout done");
   };
 

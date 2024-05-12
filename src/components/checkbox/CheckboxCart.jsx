@@ -8,7 +8,7 @@ const CheckboxCart = ({ price = 0.0, labelItem, onChange = () => {} }) => {
         name="type"
         className=" checked:p-1 checked:bg-white"
         label={labelItem}
-        color="blueColor-gray"
+        color="gray"
         onChange={onChange}
         defaultChecked={labelItem === "Free Shipping"}
       />

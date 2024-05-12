@@ -11,7 +11,7 @@ import { v4 } from "uuid";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useFirebaseImage } from "../../hooks/useFirebaseImage";
-import { addDoc, collection, doc, serverTimestamp } from "firebase/firestore";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "../../config/firebaseConfigure";
 import Description from "../../components/quill/Description";
 
@@ -23,7 +23,7 @@ const AddProducts = () => {
   const [url, setUrl] = useState("");
   const [urls, setUrls] = useState([]);
   const [comment, setComment] = useState("");
-  console.log(comment);
+
   const { control, watch, setValue, getValues, handleSubmit, reset } = useForm({
     mode: "onChange",
     defaultValues: {
@@ -40,9 +40,8 @@ const AddProducts = () => {
   });
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectStatus, setSelectStatus] = useState("");
-  console.log(selectStatus);
   const handleSelectCategory = (category) => {
-    setSelectedCategory(category);
+    setSelectedCategory(category.toLowerCase());
   };
   const handleStatus = (status) => {
     setSelectStatus(status);
@@ -80,8 +79,9 @@ const AddProducts = () => {
       return;
     }
     try {
-      const docRef = collection(db, "posts");
+      const docRef = collection(db, "products");
       await addDoc(docRef, {
+        title: values.title,
         images: combinedImages,
         category: selectedCategory,
         desc: comment,
@@ -91,12 +91,14 @@ const AddProducts = () => {
         price: Number(values.price),
         status: selectStatus,
         reviews: [],
+        productId: v4(),
       });
+
       toast.success("add products success");
       reset();
       setSelectStatus("");
-      selectedCategory("");
-      setUrls("");
+      setSelectedCategory("");
+      setUrls([]);
       setComment("");
       handleResetUpload();
     } catch (error) {
@@ -218,13 +220,13 @@ const AddProducts = () => {
 
         {/* description */}
         <Description comment={comment} setComment={setComment}></Description>
-        <div className="flex items-center justify-center w-full mx-auto">
+        <div className="flex items-center justify-center w-full mx-auto mt-20">
           <Button
             type="submit"
             // $isloading={loading}
             // disabled={loading}
           >
-            Add new post
+            Add Product
           </Button>
         </div>
       </form>

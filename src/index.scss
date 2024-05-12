@@ -83,3 +83,39 @@ textarea {
 .quill .ql-editor {
   @apply min-h-[150px];
 }
+
+// ? button add products
+.btn-addproduct {
+  text-decoration: none;
+  border: 1px solid rgb(146, 148, 248);
+  position: relative;
+  overflow: hidden;
+  font-size: 1.5rem;
+  padding: 1rem 3rem;
+  color: black;
+  text-transform: capitalize;
+}
+
+.btn-addproduct:hover {
+  box-shadow: 1px 1px 25px 10px rgba(146, 148, 248, 0.4);
+}
+
+.btn-addproduct:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(146, 148, 248, 0.4),
+    transparent
+  );
+  transition: all 650ms;
+}
+
+.btn-addproduct:hover:before {
+  left: 100%;
+}

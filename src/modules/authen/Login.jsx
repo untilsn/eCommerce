@@ -1,36 +1,28 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import InputForm from "../../components/input/InputForm";
 import InputContaint from "../../components/input/InputContaint";
 import Label from "../../components/label/Label";
 import ButtonForm from "../../components/button/ButtonForm";
-import { auth, db } from "../../config/firebaseConfigure";
+import { auth } from "../../config/firebaseConfigure";
 import { useDispatch, useSelector } from "react-redux";
 import {
   loginFailure,
   loginStart,
-  loginSuccess,
   openModalAuth,
 } from "../../redux/slice/authSlice";
 import { toast } from "react-toastify";
-import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
-import {
-  collection,
-  doc,
-  getDoc,
-  onSnapshot,
-  query,
-  where,
-} from "firebase/firestore";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { error } = useSelector((state) => state.auth);
-  if (error) toast.error("wrong email or password");
+  // const { error } = useSelector((state) => state.auth);
+  // console.log(error);
+  // if (error) toast.error("wrong email or password");
   const schema = yup.object({
     email: yup
       .string()

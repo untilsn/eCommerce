@@ -23,7 +23,7 @@ const Table = ({ item }) => {
   const { user } = useSelector((state) => state.auth);
   const initialQuantities = {};
   item.forEach((doc) => {
-    initialQuantities[doc.id] = 1; // Đặt giá trị mặc định là 1 cho mỗi sản phẩm
+    initialQuantities[doc.productId] = 1; // Đặt giá trị mặc định là 1 cho mỗi sản phẩm
   });
   const [quantities, setQuantities] = useState(initialQuantities);
   const [totalPrices, setTotalPrices] = useState({});
@@ -34,7 +34,7 @@ const Table = ({ item }) => {
     let total = 0;
     item.forEach((doc) => {
       const price = doc.price || 0;
-      const quantity = quantities[doc.id] || 0;
+      const quantity = quantities[doc.productId] || 0;
       total += price * quantity;
     });
     dispatch(displayTotal(total.toFixed(2)));
@@ -44,7 +44,7 @@ const Table = ({ item }) => {
     const newTotalPrices = {};
     Object.keys(quantities).forEach((itemId) => {
       const quantity = quantities[itemId];
-      const price = item.find((i) => i.id === itemId)?.price || 0;
+      const price = item.find((i) => i.productId === itemId)?.price || 0;
       newTotalPrices[itemId] = quantity * price;
     });
     setTotalPrices(newTotalPrices);
@@ -93,10 +93,13 @@ const Table = ({ item }) => {
         <thead className="">
           <tr>
             {TABLE_HEAD.map((head) => (
-              <th key={head} className="p-4 border-b border-blueColor-gray-100">
+              <th
+                key={head}
+                className="p-4 border-b border-gray border-opacity-40"
+              >
                 <Typography
                   variant="small"
-                  color="blueColor-gray"
+                  color="gray"
                   className={
                     head === "product" || head === "total"
                       ? "text-base font-normal leading-none text-left capitalize text-dark "
@@ -111,18 +114,18 @@ const Table = ({ item }) => {
         </thead>
         <tbody>
           {item.map((doc) => {
-            const total = totalPrices[doc.id] || 0;
+            const total = totalPrices[doc.productId] || 0;
             return (
               <tr key={doc.id}>
                 <td className="p-4 max-w-[440px]">
                   <Typography
                     variant="small"
-                    color="blueColor-gray"
+                    color="gray"
                     className="text-sm font-normal"
                   >
                     <span className="flex items-center gap-2">
                       <Link
-                        to={`/product?id=${doc.id}`}
+                        to={`/product?id=${doc.productId}`}
                         className="hover:shadow-sm max-w-[60px] w-full h-[80px]"
                       >
                         <img
@@ -132,7 +135,7 @@ const Table = ({ item }) => {
                         />
                       </Link>
                       <Link
-                        to={`/product?id=${doc.id}`}
+                        to={`/product?id=${doc.productId}`}
                         className="text-base font-medium text-dark overflow-hidden overflow-ellipsis h-[50px] hover:text-yellowColor"
                       >
                         {doc?.title}
@@ -143,7 +146,7 @@ const Table = ({ item }) => {
                 <td className="p-4">
                   <Typography
                     variant="small"
-                    color="blueColor-gray"
+                    color="gray"
                     className="text-lg font-normal text-center"
                   >
                     ${doc?.price}
@@ -152,11 +155,11 @@ const Table = ({ item }) => {
                 <td className="p-4">
                   <Typography>
                     <span className="flex select-none items-center justify-between px-2  py-3 border border-gray w-[100px] border-opacity-30 ">
-                      <span onClick={() => handleDecreQuantity(doc.id)}>
+                      <span onClick={() => handleDecreQuantity(doc.productId)}>
                         <FiMinus />
                       </span>
-                      <span>{quantities[doc.id] || 0}</span>
-                      <span onClick={() => handleIncreQuantity(doc.id)}>
+                      <span>{quantities[doc.productId] || 0}</span>
+                      <span onClick={() => handleIncreQuantity(doc.productId)}>
                         <FiPlus />
                       </span>
                     </span>
@@ -165,13 +168,13 @@ const Table = ({ item }) => {
                 <td>
                   <Typography
                     variant="small"
-                    color="blueColor-gray"
+                    color="gray"
                     className="flex items-center justify-between gap-3 text-lg max-w-[120px] w-full font-medium text-center text-yellowColor"
                   >
                     ${total.toFixed(2)}
                     <span
                       className="text-dark"
-                      onClick={() => handleRemoveCart(doc.id)}
+                      onClick={() => handleRemoveCart(doc.productId)}
                     >
                       <IoCloseOutline></IoCloseOutline>
                     </span>

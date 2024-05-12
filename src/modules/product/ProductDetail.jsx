@@ -8,6 +8,7 @@ import { FooterIconContact } from "../../components/icon/IconContact";
 import { ReviewIcon } from "../../components/card/CardItem";
 import { v4 } from "uuid";
 import QuantityItem from "../../components/quantity/QuantityItem";
+import parse from "html-react-parser";
 
 const ProductDetail = ({ item }) => {
   if (!item) return null;
@@ -42,7 +43,7 @@ const ProductDetail = ({ item }) => {
       </div>
       {/* content */}
       <div className="flex flex-col gap-3">
-        <h1 className="text-3xl text-darkPrimary">{item?.title}</h1>
+        <h1 className="text-2xl text-darkPrimary">{item?.title}</h1>
         <div className="flex items-center gap-3">
           <div className="flex items-center ">
             {Array(5)
@@ -57,7 +58,7 @@ const ProductDetail = ({ item }) => {
         </div>
         <h2 className="text-3xl font-normal text-yellowColor">${item.price}</h2>
         <p className="text-sm font-light text-gray text-opacity-80">
-          {item.desc}
+          {parse(item?.desc)}
         </p>
         <div className="flex items-center gap-5 text-sm text-dark text-opacity-90">
           size

@@ -8,18 +8,15 @@ import { MdCompareArrows } from "react-icons/md";
 import { FaHeart, FaRegHeart } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useFetchingWishlists } from "../../hooks/useFetchingWishlists";
 import { useAddProduct } from "../../hooks/useAddProduct";
 
 const CardShop = ({ item }) => {
   if (!item) return;
   const [isHovered, setIsHovered] = useState(false);
-  const { user } = useSelector((state) => state.auth);
   const { wishlistArray } = useSelector((state) => state.store);
-  const isProductInWishlist = wishlistArray.some(
-    (wishlistItem) => wishlistItem.id === item.id
+  const isProductInWishlist = wishlistArray?.some(
+    (wishlistItem) => wishlistItem.productId === item.productId
   );
-  useFetchingWishlists(user);
   const { handleAddItem } = useAddProduct("wishlists");
 
   return (
@@ -29,10 +26,10 @@ const CardShop = ({ item }) => {
       className="z-0 transition-all shadow-sm hover:shadow-itemShadow group"
     >
       <div className="-z-10 max-w-[204px] w-full h-[210px] relative transition-all ">
-        <Link to={`/product?id=${item.id}`}>
+        <Link to={`/product?id=${item.productId}`}>
           <img
             className={`${
-              item.category === "unknown" ? "blur-3xl" : "" //? NSFW feature
+              item.category === "unknown" ? "" : "" //? NSFW feature
             } object-contain w-full h-full transition-all`}
             src={isHovered ? item?.images[2] : item?.images[0]}
             alt="img-item"

@@ -66,13 +66,10 @@ const DashboardCategory = () => {
           <thead className="">
             <tr>
               {TABLE_HEAD.map((head) => (
-                <th
-                  key={head}
-                  className="p-4 border-b border-blueColor-gray-100"
-                >
+                <th key={head} className="p-4 border-b border-gray-100">
                   <Typography
                     variant="small"
-                    color="blueColor-gray"
+                    color="gray"
                     className={
                       head === "product"
                         ? "text-sm  leading-none text-left  font-medium capitalize text-dark "
@@ -88,9 +85,7 @@ const DashboardCategory = () => {
           <tbody>
             {TABLE_ROWS.map(({ status }, item, index) => {
               const isLast = index === TABLE_ROWS.length - 1;
-              const classes = isLast
-                ? "p-4"
-                : "p-4 border-b border-blueColor-gray-50";
+              const classes = isLast ? "p-4" : "p-4 border-b border-gray-50";
               return (
                 <tr
                   key={item.id}
@@ -99,7 +94,7 @@ const DashboardCategory = () => {
                   <td className="p-4">
                     <Typography
                       variant="small"
-                      color="blueColor-gray"
+                      color="gray"
                       className="text-sm font-normal"
                     >
                       5UzBL
@@ -108,7 +103,7 @@ const DashboardCategory = () => {
                   <td className="p-4">
                     <Typography
                       variant="small"
-                      color="blueColor-gray"
+                      color="gray"
                       className="text-sm font-normal"
                     >
                       <span>namee</span>
@@ -117,7 +112,7 @@ const DashboardCategory = () => {
                   <td className="p-4">
                     <Typography
                       variant="small"
-                      color="blueColor-gray"
+                      color="gray"
                       className="text-sm font-normal "
                     >
                       <span>computer</span>
@@ -143,7 +138,7 @@ const DashboardCategory = () => {
                   <td className="p-4">
                     <Typography
                       variant="small"
-                      color="blueColor-gray"
+                      color="gray"
                       className="text-sm font-normal"
                     >
                       <span className="flex items-center justify-start gap-3">

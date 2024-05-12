@@ -10,15 +10,13 @@ import BoxNoItem from "../components/BoxNoItem";
 import { Link } from "react-router-dom";
 
 const CartPage = () => {
-  const { user } = useSelector((state) => state.auth);
   const { cartArray } = useSelector((state) => state.store);
-  console.log(cartArray);
   return (
     <div>
       <ShopBanner title="Shopping Cart"> </ShopBanner>
       <Breadcrumb children="Shopping Cart"></Breadcrumb>
       <div className="container">
-        {cartArray.length === 0 ? (
+        {cartArray?.length === 0 || cartArray === null ? (
           <BoxNoItem type="carts"></BoxNoItem>
         ) : (
           <div className="grid grid-cols-[72%_28%] gap-5 mt-10 mb-40">
@@ -28,7 +26,7 @@ const CartPage = () => {
                 <div className="flex items-center max-w-[350px] w-full gap-5">
                   <input
                     type="text"
-                    className="w-full p-3 text-sm border-none  bg-gray bg-opacity-5"
+                    className="w-full p-3 text-sm border-none bg-gray bg-opacity-5"
                     placeholder="coupon code"
                   />
                   <button className="p-4 text-sm border text-yellowColor border-yellowColor">

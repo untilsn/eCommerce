@@ -1,28 +1,32 @@
-import {
-  BsGrid,
-  BsGrid3X2Gap,
-  BsGrid3X2GapFill,
-  BsGridFill,
-} from "react-icons/bs";
-import CardShop from "../../components/card/CardShop";
-
-import { useDataFetcher } from "../../hooks/useFetchData";
-import { useSelector } from "react-redux";
-import { useState } from "react";
-import CardGrid from "../../components/card/CardGrid";
+import React, { useEffect, useState } from "react";
 import { BiGridHorizontal, BiGridSmall } from "react-icons/bi";
+import CardGrid from "../../components/card/CardGrid";
+import CardShop from "../../components/card/CardShop";
+import { useSelector } from "react-redux";
+import { Input } from "@material-tailwind/react";
+import Pagination from "../../components/pagination/Pagination";
 
 const ShopDisplay = () => {
-  const { products } = useSelector((state) => state.store);
+  const { categoryProducts } = useSelector((state) => state.store);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemPerPage, setItemPerPage] = useState(8);
+  const lastPostIndex = currentPage * itemPerPage;
+  const firstPostIndex = lastPostIndex - itemPerPage;
+
+  const [search, setSearch] = useState("");
   const [isActive, setIsActive] = useState("grid-1");
-  useDataFetcher();
+
+  const filterProducts = categoryProducts?.filter((product) =>
+    product.title.toLowerCase().includes(search)
+  );
+
   return (
     <div>
       <div className="flex items-center justify-between py-10">
         <h1 className="text-sm">
           Showing{" "}
           <span>
-            {products?.length} of {products?.length}
+            {filterProducts?.length} of {categoryProducts?.length}
           </span>{" "}
           Products
         </h1>
@@ -53,21 +57,51 @@ const ShopDisplay = () => {
               } transition-all`}
             />
           </div>
+          <div>
+            <Input
+              variant="standard"
+              label="search products"
+              placeholder="Search products..."
+              color="black"
+              value={search}
+              onChange={(e) => setSearch(e.target.value.toLowerCase())}
+            />
+          </div>
         </div>
       </div>
-      {isActive === "grid-1" ? (
-        <div className="grid grid-cols-1 gap-5">
-          {products.map((item) => (
-            <CardGrid key={item.id} item={item}></CardGrid>
-          ))}
+      {filterProducts?.length > 0 ? (
+        <div>
+          {isActive === "grid-1" ? (
+            <div className="grid grid-cols-1 gap-5">
+              {filterProducts
+                .slice(firstPostIndex, lastPostIndex)
+                .map((item) => (
+                  <CardGrid key={item.id} item={item}></CardGrid>
+                ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-4 gap-6">
+              {filterProducts
+                .slice(firstPostIndex, lastPostIndex)
+                .map((item) => (
+                  <CardShop key={item.id} item={item}></CardShop>
+                ))}
+            </div>
+          )}
         </div>
       ) : (
-        <div className="grid grid-cols-4 gap-6">
-          {products?.map((item) => (
-            <CardShop key={item.id} item={item}></CardShop>
-          ))}
+        <div className="text-base font-light text-gray">
+          No products matching your selection.
         </div>
       )}
+      <div className="flex justify-center w-full">
+        <Pagination
+          totalPost={categoryProducts?.length}
+          postPerPage={itemPerPage}
+          setCurrentPage={setCurrentPage}
+          currentPage={currentPage}
+        ></Pagination>
+      </div>
     </div>
   );
 };

@@ -4,7 +4,6 @@ import ActionView from "../../components/action/ActionView";
 import ActionEdit from "../../components/action/ActionEdit";
 import ActionDelete from "../../components/action/ActionDelete";
 import { Chip, Typography, Card } from "@material-tailwind/react";
-import { useDataFetcher } from "../../hooks/useFetchData";
 import { useSelector } from "react-redux";
 const TABLE_HEAD = [
   "id",
@@ -38,13 +37,10 @@ const DashboardProduct = () => {
           <thead className="">
             <tr>
               {TABLE_HEAD.map((head) => (
-                <th
-                  key={head}
-                  className="py-4 border-b border-blueColor-gray-100"
-                >
+                <th key={head} className="py-4 border-b border-gray-100">
                   <Typography
                     variant="small"
-                    color="blueColor-gray"
+                    color="gray"
                     className={
                       head === "product"
                         ? "text-sm  leading-none text-left  font-medium capitalize text-dark "
@@ -60,9 +56,7 @@ const DashboardProduct = () => {
           <tbody>
             {filterProducts.map((item, index) => {
               const isLast = index === products.length - 1;
-              const classes = isLast
-                ? "p-4"
-                : "p-4 border-b border-blueColor-gray-50";
+              const classes = isLast ? "p-4" : "p-4 border-b border-gray-50";
               return (
                 <tr
                   key={item.id}
@@ -71,7 +65,7 @@ const DashboardProduct = () => {
                   <td className="p-4">
                     <Typography
                       variant="small"
-                      color="blueColor-gray"
+                      color="gray"
                       className="text-sm font-normal"
                       title={item?.id}
                     >
@@ -81,7 +75,7 @@ const DashboardProduct = () => {
                   <td className="py-4 w-[500px]">
                     <Typography
                       variant="small"
-                      color="blueColor-gray"
+                      color="gray"
                       className="text-sm font-normal w-[500px]"
                     >
                       <span className="flex items-center justify-start gap-3 max-w-[500px]">
@@ -113,7 +107,7 @@ const DashboardProduct = () => {
                   <td>
                     <Typography
                       variant="small"
-                      color="blueColor-gray"
+                      color="gray"
                       className="text-sm font-normal text-center"
                     >
                       <span className="flex flex-col gap-1">
@@ -125,7 +119,7 @@ const DashboardProduct = () => {
                   <td>
                     <Typography
                       variant="small"
-                      color="blueColor-gray"
+                      color="gray"
                       className="text-sm font-normal"
                     >
                       <span>John Michael</span>
@@ -150,7 +144,7 @@ const DashboardProduct = () => {
                   <td>
                     <Typography
                       variant="small"
-                      color="blueColor-gray"
+                      color="gray"
                       className="text-sm font-normal"
                     >
                       <span className="flex items-center justify-center gap-3">

@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { v4 } from "uuid";
 import { AiOutlineLike } from "react-icons/ai";
 import { AiOutlineDislike } from "react-icons/ai";
+import parse from "html-react-parser";
 
 const ProductDesc = ({ item }) => {
   const [tabs, setTabs] = useState("review");
-  console.log(item?.reviews);
   return (
     <div className="">
       <div className="flex items-center justify-center gap-10">
@@ -44,7 +44,7 @@ const ProductDesc = ({ item }) => {
       {tabs === "description" ? (
         <div className="p-10 mt-5 text-sm font-light leading-8 border text-gray border-gray border-opacity-20">
           <h3 className="mb-6 text-base font-medium text-dark">Description</h3>
-          {item.desc}
+          {parse(item?.desc)}
         </div>
       ) : tabs === "rule" ? (
         <div className="p-10 mt-5 text-sm font-light leading-8 border text-gray border-gray border-opacity-10">

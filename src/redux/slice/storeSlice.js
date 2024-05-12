@@ -7,6 +7,7 @@ const storeSlice = createSlice({
     products: [],
     wishlistArray: [],
     cartArray: [],
+    categoryProducts: [],
     total: 0,
   },
   reducers: {
@@ -40,6 +41,12 @@ const storeSlice = createSlice({
         total: action.payload,
       };
     },
+    displayCategoryProducts: (state, action) => {
+      return {
+        ...state,
+        categoryProducts: action.payload,
+      };
+    },
   },
 });
 export const {
@@ -48,5 +55,6 @@ export const {
   displayCart,
   displayCategories,
   displayTotal,
+  displayCategoryProducts,
 } = storeSlice.actions;
 export default storeSlice.reducer;

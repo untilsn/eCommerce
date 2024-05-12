@@ -1,22 +1,26 @@
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import {
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+  where,
+} from "firebase/firestore";
 import { useEffect } from "react";
 import { db } from "../config/firebaseConfigure";
 import { useDispatch } from "react-redux";
-import { fetchingProducts } from "../redux/slice/storeSlice";
+import { displayCategoryProducts } from "../redux/slice/storeSlice";
 import { useFormatDate } from "./useFormatDate";
 
 // Định nghĩa functional component của bạn
 
-export function useDataFetcher() {
+export function useFetchCategory(category) {
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log("qưehưeqhiqewihuqưeiuqew");
     try {
       async function fetchData() {
-        const q = query(
-          collection(db, "products"),
-          orderBy("createAt", "desc")
-        );
+        const q = category
+          ? query(collection(db, "products"), where("category", "==", category))
+          : query(collection(db, "products"), orderBy("createAt", "desc"));
 
         onSnapshot(q, (snapshot) => {
           let result = [];
@@ -30,14 +34,14 @@ export function useDataFetcher() {
             return { ...item, createAt: useFormatDate(item) };
           });
 
-          dispatch(fetchingProducts(formattedResult));
+          dispatch(displayCategoryProducts(formattedResult));
         });
       }
       fetchData();
     } catch (error) {
       console.log(error);
     }
-  }, []); // Đảm bảo useEffect chỉ chạy một lần (khi component được mount)
+  }, [category]); // Đảm bảo useEffect chỉ chạy một lần (khi component được mount)
 
   // Component này không cần trả về gì cả
   return null;

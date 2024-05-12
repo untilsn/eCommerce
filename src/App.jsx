@@ -19,13 +19,15 @@ import AddCategories from "./pages/manage/AddCategories";
 import AddProducts from "./pages/manage/AddProducts";
 import { collection, onSnapshot } from "firebase/firestore";
 import { displayCategories } from "./redux/slice/storeSlice";
-import { useFetchingProducts } from "./hooks/useFetchingProducts";
 import BlogPage from "./pages/BlogPage";
 import { useFetchingWishlists } from "./hooks/useFetchingWishlists";
+import { useFetchingProducts } from "./hooks/useFetchingProducts";
+import { useDataFetcher } from "./hooks/useFetchData";
 
 function App() {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
+  useDataFetcher();
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {

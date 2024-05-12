@@ -2,12 +2,9 @@ import React from "react";
 import CardRelative from "../../components/card/CardRelative";
 import TitlePath from "../../components/title/TitlePath";
 import { useSelector } from "react-redux";
-import { useDataFetcher } from "../../hooks/useFetchData";
 
 const ShopRelative = () => {
-  useDataFetcher();
   const { products } = useSelector((state) => state.store);
-  console.log(products);
   return (
     <div>
       <TitlePath classname="mt-20 text-3xl font-normal text-center">

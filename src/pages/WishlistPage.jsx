@@ -3,21 +3,19 @@ import ShopBanner from "../modules/shop/ShopBanner";
 import Breadcrumb from "../components/breadcrumb/Breadcrumb";
 import { FooterIconContact } from "../components/icon/IconContact";
 import { useSelector } from "react-redux";
-import { useFetchingWishlists } from "../hooks/useFetchingWishlists";
 import TableWishlist from "../components/table/TableWishlist";
 import BoxNoItem from "../components/BoxNoItem";
 
 const WishlistPage = () => {
-  const { user } = useSelector((state) => state.auth);
   const { wishlistArray } = useSelector((state) => state.store);
-  useFetchingWishlists(user);
+  console.log(wishlistArray);
   return (
     <div>
       <ShopBanner title="wishlist" />
       <Breadcrumb children="shop" url="Wishlist" />
       <div className="container">
         {/* table */}
-        {wishlistArray.length === 0 ? (
+        {wishlistArray?.length === 0 || wishlistArray === null ? (
           <BoxNoItem type="wishlists"></BoxNoItem>
         ) : (
           <div>

@@ -13,7 +13,6 @@ import {
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { db } from "../../config/firebaseConfigure";
-import { useFetchingWishlists } from "../../hooks/useFetchingWishlists";
 import { displayWishlist } from "../../redux/slice/storeSlice";
 import { useAddProduct } from "../../hooks/useAddProduct";
 
@@ -21,7 +20,6 @@ const TABLE_HEAD = ["Product", "Price", "Stock Status", ""];
 
 const TableWishlist = ({ Wishlists }) => {
   const { user } = useSelector((state) => state.auth);
-  useFetchingWishlists(user);
   const { handleAddItem } = useAddProduct();
   const handleDeleteWishlist = async (productId) => {
     try {
@@ -38,7 +36,7 @@ const TableWishlist = ({ Wishlists }) => {
         console.log("Document successfully deleted!");
         toast.success("remove success");
         const updatedWishlists = [...Wishlists].filter(
-          (item) => item.id !== productId
+          (item) => item.productId !== productId
         );
 
         // Cập nhật state của Redux sau khi xóa
@@ -60,11 +58,11 @@ const TableWishlist = ({ Wishlists }) => {
               {TABLE_HEAD.map((head) => (
                 <th
                   key={head}
-                  className="p-4 border-b border-blueColor-gray-100 "
+                  className="p-4 border-b border-gray border-opacity-10"
                 >
                   <Typography
                     variant="small"
-                    color="blueColor-gray"
+                    color="gray"
                     className="text-base font-medium leading-none opacity-70"
                   >
                     {head}
@@ -78,13 +76,13 @@ const TableWishlist = ({ Wishlists }) => {
               const isLast = index === Wishlists?.length - 1;
               const classes = isLast
                 ? "p-4 text-base"
-                : "p-4 border-b border-blueColor-gray-50 text-base";
+                : "p-4 border-b border-gray border-opacity-10 text-base";
               return (
-                <tr key={item?.id}>
+                <tr key={item?.productId}>
                   <td className={`${classes} max-w-[580px] `}>
                     <div className="flex items-center gap-5">
                       <Link
-                        to={`/product?id=${item?.id}`}
+                        to={`/product?id=${item?.productId}`}
                         className="max-w-[100px] w-[100px] h-[100px]"
                       >
                         <img
@@ -95,10 +93,10 @@ const TableWishlist = ({ Wishlists }) => {
                       </Link>
                       <Typography
                         variant="small"
-                        color="blueColor-gray"
+                        color="gray"
                         className="flex-1 text-base font-medium hover:text-yellowColor"
                       >
-                        <Link to={`/product?id=${item?.id}`}>
+                        <Link to={`/product?id=${item?.productId}`}>
                           {item?.title}
                         </Link>
                       </Typography>
@@ -107,7 +105,7 @@ const TableWishlist = ({ Wishlists }) => {
                   <td className={classes}>
                     <Typography
                       variant="small"
-                      color="blueColor-gray"
+                      color="gray"
                       className="text-lg text-left font-base text-yellowColor"
                     >
                       ${item?.price}
@@ -116,7 +114,7 @@ const TableWishlist = ({ Wishlists }) => {
                   <td className={classes}>
                     <Typography
                       variant="small"
-                      color="blueColor-gray"
+                      color="gray"
                       className="text-lg text-left font-base text-yellowColor"
                     >
                       {item?.stock?.length !== 0 ? "In stock" : "Out stock"}
@@ -133,7 +131,9 @@ const TableWishlist = ({ Wishlists }) => {
                         </span>
                         <span>Add to Cart</span>
                       </span>
-                      <span onClick={() => handleDeleteWishlist(item?.id)}>
+                      <span
+                        onClick={() => handleDeleteWishlist(item?.productId)}
+                      >
                         <IoCloseOutline className="text-3xl text-gray text-opacity-65 hover:text-opacity-100" />
                       </span>
                     </div>

@@ -1,28 +1,26 @@
-import {
-  collection,
-  getDocs,
-  onSnapshot,
-  query,
-  where,
-} from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { displayWishlist } from "../redux/slice/storeSlice";
 import { db } from "../config/firebaseConfigure";
 
 export function useFetchingWishlists(user) {
   const dispatch = useDispatch();
+
   useEffect(() => {
+    if (!user) {
+      dispatch(displayWishlist([])); // Nếu không có user, set giỏ hàng thành mảng rỗng
+      return; // Trả về ngay sau khi set giỏ hàng để ngăn hook tiếp tục thực thi
+    }
     const fetchData = async () => {
-      if (!user) return;
       try {
         const wishlistsQuery = query(
           collection(db, "wishlists"),
           where("userId", "==", user.uid)
         );
 
-        const unsubscribe = onSnapshot(wishlistsQuery, (snapshot) => {
-          const newProductIds = [];
+        const snapshotListener = onSnapshot(wishlistsQuery, (snapshot) => {
+          let newProductIds = [];
           snapshot.forEach((doc) => {
             const wishlistItem = doc.data();
             newProductIds.push(wishlistItem.productId);
@@ -35,7 +33,7 @@ export function useFetchingWishlists(user) {
 
           const productsQuery = query(
             collection(db, "products"),
-            where("id", "in", newProductIds)
+            where("productId", "in", newProductIds)
           );
 
           onSnapshot(productsQuery, (snapshot) => {
@@ -47,12 +45,13 @@ export function useFetchingWishlists(user) {
           });
         });
 
-        return () => unsubscribe();
+        return () => snapshotListener();
       } catch (error) {
         console.log("Error in useFetchingProducts:", error);
       }
     };
 
     fetchData();
+    return () => {};
   }, [user, dispatch]);
 }

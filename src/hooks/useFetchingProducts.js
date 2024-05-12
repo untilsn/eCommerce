@@ -6,17 +6,22 @@ import { displayCart } from "../redux/slice/storeSlice";
 
 export function useFetchingProducts(user) {
   const dispatch = useDispatch();
+
   useEffect(() => {
+    if (!user) {
+      dispatch(displayCart([])); // Nếu không có user, set giỏ hàng thành mảng rỗng
+      return; // Trả về ngay sau khi set giỏ hàng để ngăn hook tiếp tục thực thi
+    }
     const fetchData = async () => {
-      if (!user) return;
       try {
         const wishlistsQuery = query(
           collection(db, "carts"),
           where("userId", "==", user.uid)
         );
 
-        const unsubscribe = onSnapshot(wishlistsQuery, (snapshot) => {
-          const newProductIds = [];
+        const snapshotListener = onSnapshot(wishlistsQuery, (snapshot) => {
+          let newProductIds = [];
+
           snapshot.forEach((doc) => {
             const wishlistItem = doc.data();
             newProductIds.push(wishlistItem.productId);
@@ -29,7 +34,7 @@ export function useFetchingProducts(user) {
 
           const productsQuery = query(
             collection(db, "products"),
-            where("id", "in", newProductIds)
+            where("productId", "in", newProductIds)
           );
 
           onSnapshot(productsQuery, (snapshot) => {
@@ -41,12 +46,17 @@ export function useFetchingProducts(user) {
           });
         });
 
-        return () => unsubscribe();
+        return () => {
+          snapshotListener(); // Hủy đăng ký khỏi trình nghe snapshot
+        };
       } catch (error) {
-        console.log("Error in useFetchingProducts:", error);
+        console.log("Lỗi trong useFetchingProducts:", error);
+        console.log(error);
       }
     };
 
     fetchData();
+
+    return () => {}; // Hàm dọn dẹp cho lần render ban đầu
   }, [user, dispatch]);
 }

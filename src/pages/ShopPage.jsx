@@ -3,9 +3,7 @@ import ShopBanner from "../modules/shop/ShopBanner";
 import ShopDisplay from "../modules/shop/ShopDisplay";
 import ShopCategory from "../modules/shop/ShopCategory";
 import Breadcrumb from "../components/breadcrumb/Breadcrumb";
-import { useLocation, useParams, useSearchParams } from "react-router-dom";
-import { useFetchingProducts } from "../hooks/useFetchingProducts";
-import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 
 const ShopPage = () => {
   const location = useLocation();
