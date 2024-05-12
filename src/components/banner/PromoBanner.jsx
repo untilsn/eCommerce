@@ -1,5 +1,5 @@
 import React from "react";
-import backgroundPromo from "/code/eCommerce-redux/public/promobanner.jpg";
+import backgroundPromo from "/public/promobanner.jpg";
 import ButtonItem from "../button/ButtonItem";
 
 const PromoBanner = () => {
