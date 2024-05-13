@@ -2,9 +2,13 @@ import React, { useState } from "react";
 import { IoIosMenu } from "react-icons/io";
 import { IoMdClose } from "react-icons/io";
 import { v4 } from "uuid";
+import { useFetchProductCategory } from "../../hooks/useFetchProductCategory";
+import { Link } from "react-router-dom";
 
 const BrowserCategories = ({ category }) => {
   const [hovered, setHovered] = useState(false);
+  const [selectCategory, setSelectCategory] = useState("");
+  useFetchProductCategory(selectCategory);
 
   return (
     <div
@@ -44,13 +48,15 @@ const BrowserCategories = ({ category }) => {
       {/* categori */}
       {hovered ? (
         <div className="absolute top-[100%] left-0 right-0 bg-white shadow-lg">
-          {category.map((item) => (
-            <div
-              key={v4()}
-              className="p-5 text-sm capitalize hover:bg-gray hover:bg-opacity-5 text-dark border-b_primary"
-            >
-              {item?.name}
-            </div>
+          {category.slice(0, 6).map((item) => (
+            <Link key={item.id} to={`/shop`}>
+              <div
+                onClick={() => setSelectCategory(item.name)}
+                className="p-5 text-sm capitalize hover:bg-gray hover:bg-opacity-5 text-dark border-b_primary"
+              >
+                {item?.name}
+              </div>
+            </Link>
           ))}
         </div>
       ) : (

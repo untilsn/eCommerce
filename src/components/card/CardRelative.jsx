@@ -1,27 +1,40 @@
 import React, { useState } from "react";
-import { FaCartPlus, FaRegHeart } from "react-icons/fa";
+import { FaCartPlus, FaHeart, FaRegHeart } from "react-icons/fa";
 import { MdCompareArrows } from "react-icons/md";
 import { PiBinocularsBold } from "react-icons/pi";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { useAddProduct } from "../../hooks/useAddProduct";
+import { useSelector } from "react-redux";
+import { useCheckFavorite } from "../../hooks/useCheckFavorite";
 
 const CardRelative = ({ item }) => {
   const [cardHover, setCardHover] = useState(false);
+  const { handleAddItem } = useAddProduct();
+  const isFavorite = useCheckFavorite(item);
   return (
-    <NavLink
-      to={`/product?id=${item.id}`}
+    <div
       onMouseEnter={() => setCardHover(true)}
       onMouseLeave={() => setCardHover(false)}
       className="overflow-hidden group hover:shadow-itemShadow"
     >
       <div className="max-w-[400px] w-full relative overflow-hidden">
-        <img
-          className="object-contain w-full h-[340px] "
-          src={`${cardHover ? item.images[1] : item.images[0]}`}
-          alt=""
-        />
+        <NavLink to={`/product?id=${item?.productId}`}>
+          <img
+            className="object-contain w-full h-[340px] "
+            src={`${cardHover ? item.images[1] : item.images[0]}`}
+            alt=""
+          />
+        </NavLink>
         <ul className="absolute flex flex-col gap-3 text-sm top-4 right-4 transition-all opacity-0 group-hover:opacity-90 -translate-x-[50%] group-hover:translate-x-[5%]">
-          <li className="p-3 bg-white rounded-full hover:bg-yellowColor hover:text-white text-yellowColor">
-            <FaRegHeart />
+          <li
+            onClick={() => handleAddItem(item, "wishlists")}
+            className={`${
+              isFavorite
+                ? "bg-dark text-yellowColor"
+                : "bg-white text-yellowColor"
+            } p-3  rounded-full hover:bg-yellowColor hover:text-white `}
+          >
+            {isFavorite ? <FaHeart /> : <FaRegHeart />}
           </li>
           <li className="p-3 bg-white rounded-full hover:bg-yellowColor hover:text-white text-yellowColor">
             <PiBinocularsBold />
@@ -39,20 +52,26 @@ const CardRelative = ({ item }) => {
           <span className="text-yellowColor group-hover/item:text-white">
             <FaCartPlus />
           </span>
-          <span className="text-white group-hover/item:text-white">
+          <span
+            onClick={() => handleAddItem(item, "carts")}
+            className="text-white group-hover/item:text-white"
+          >
             add to cart
           </span>
         </div>
       </div>
       <div className="z-0 flex flex-col items-center gap-2 p-5 capitalize">
-        <h1 className="text-sm font-normal text-center text-black overflow-hidden overflow-ellipsis h-[30px]">
-          {item?.title}
-        </h1>
+        <NavLink to={`/product?id=${item?.productId}`}>
+          <h1 className="text-sm font-normal text-center text-black overflow-hidden overflow-ellipsis h-[40px]">
+            {item?.title}
+          </h1>
+        </NavLink>
+
         <h2 className="text-sm font-normal text-center text-yellowColor">
           ${item?.price}
         </h2>
       </div>
-    </NavLink>
+    </div>
   );
 };
 

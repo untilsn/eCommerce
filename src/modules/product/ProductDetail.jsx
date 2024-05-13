@@ -1,21 +1,29 @@
-import React, { useEffect, useState } from "react";
-import { FaCartPlus, FaMinus } from "react-icons/fa6";
-import { FaPlus } from "react-icons/fa6";
-import { CiHeart } from "react-icons/ci";
-import { SupportService } from "../../components/icon/IconService";
-import SupportServicesItem from "../homepage/path/SupportServicesItem";
+import React, { useEffect, useLayoutEffect, useState } from "react";
+import { FaCartPlus, FaHeart, FaRegHeart } from "react-icons/fa6";
 import { FooterIconContact } from "../../components/icon/IconContact";
 import { ReviewIcon } from "../../components/card/CardItem";
 import { v4 } from "uuid";
 import QuantityItem from "../../components/quantity/QuantityItem";
 import parse from "html-react-parser";
+import { useCheckFavorite } from "../../hooks/useCheckFavorite";
+import { useAddProduct } from "../../hooks/useAddProduct";
 
-const ProductDetail = ({ item }) => {
+const ProductDetail = ({ item, productId }) => {
   if (!item) return null;
   const [image, setImage] = useState(item.images?.[0]);
   useEffect(() => {
-    document.body.scrollIntoView({ behavior: "smooth", block: "start" });
-  }, []);
+    setImage(item.images?.[0]);
+  }, [item, productId]);
+
+  useLayoutEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, [item, productId]);
+  const isFavorite = useCheckFavorite(item);
+  const { handleAddItem } = useAddProduct();
+
   return (
     <div className="grid grid-cols-2 mt-10 mb-20 gap-7">
       {/* show image */}
@@ -57,9 +65,9 @@ const ProductDetail = ({ item }) => {
           </span>
         </div>
         <h2 className="text-3xl font-normal text-yellowColor">${item.price}</h2>
-        <p className="text-sm font-light text-gray text-opacity-80">
+        <div className="text-sm font-light text-gray text-opacity-80">
           {parse(item?.desc)}
-        </p>
+        </div>
         <div className="flex items-center gap-5 text-sm text-dark text-opacity-90">
           size
           <select
@@ -77,17 +85,28 @@ const ProductDetail = ({ item }) => {
         </div>
         {/* add and wishlist */}
         <div className="flex items-center gap-10 mb-5">
-          <div className="flex items-center justify-center gap-5 p-4 uppercase bg-white border border-gray border-opacity-20 text-yellowColor max-w-[250px] w-full  hover:bg-yellowColor hover:text-white">
+          <div
+            onClick={() => handleAddItem(item, "carts")}
+            className="flex items-center justify-center gap-5 p-4 uppercase bg-white border border-gray border-opacity-20 text-yellowColor max-w-[250px] w-full  hover:bg-yellowColor hover:text-white"
+          >
             <span>
               <FaCartPlus />
             </span>
             <span>add to carts</span>
           </div>
-          <div className="flex items-center gap-5 text-sm">
-            <span>
-              <CiHeart className="text-yellowColor" />
+
+          <div
+            onClick={() => handleAddItem(item, "wishlists")}
+            className="flex items-center gap-5 text-sm"
+          >
+            <span className="text-yellowColor">
+              {isFavorite ? <FaHeart /> : <FaRegHeart />}
             </span>
-            <span className="hover:text-yellowColor hover:underline">
+            <span
+              className={`${
+                isFavorite ? "text-yellowColor underline" : "text-black"
+              }`}
+            >
               Add to Wishlist
             </span>
           </div>

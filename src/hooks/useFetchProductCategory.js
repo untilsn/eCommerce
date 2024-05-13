@@ -13,7 +13,7 @@ import { useFormatDate } from "./useFormatDate";
 
 // Định nghĩa functional component của bạn
 
-export function useFetchCategory(category) {
+export function useFetchProductCategory(category) {
   const dispatch = useDispatch();
   useEffect(() => {
     try {
@@ -24,7 +24,6 @@ export function useFetchCategory(category) {
 
         onSnapshot(q, (snapshot) => {
           let result = [];
-          console.log(result);
           snapshot.forEach((doc) => {
             result.push({
               id: doc.id,

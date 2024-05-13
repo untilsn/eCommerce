@@ -4,16 +4,14 @@ import { LiaBinocularsSolid, LiaHeart, LiaHeartSolid } from "react-icons/lia";
 import { ReviewIcon } from "./CardItem";
 import { v4 } from "uuid";
 import { useAddProduct } from "../../hooks/useAddProduct";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import parse from "html-react-parser";
+import { useCheckFavorite } from "../../hooks/useCheckFavorite";
 
 const CardGrid = ({ item }) => {
-  const { wishlistArray } = useSelector((state) => state.store);
-  const isProductInWishlist = wishlistArray.some(
-    (wishlistItem) => wishlistItem.productId === item?.productId
-  );
   const { handleAddItem } = useAddProduct();
+  const isFavorite = useCheckFavorite(item);
+
   return (
     <div className="grid items-center grid-cols-4 py-5 border-b border-gray border-opacity-20">
       {/* image */}
@@ -37,9 +35,9 @@ const CardGrid = ({ item }) => {
             {item?.title}
           </h1>
         </div>
-        <p className="leading-6 text-sm text-gray overflow-hidden overflow-ellipsis h-[78px]">
+        <div className="leading-6 text-sm text-gray overflow-hidden overflow-ellipsis h-[78px]">
           {parse(item?.desc)}
-        </p>
+        </div>
       </div>
       {/* chuc nang */}
       <div className="flex flex-col col-span-1 gap-4 text-opacity-50 text-gray">
@@ -64,7 +62,7 @@ const CardGrid = ({ item }) => {
             onClick={() => handleAddItem(item, "wishlists")} //?add wishlists
             className={`${""} flex items-center justify-center gap-1 hover:text-yellowColor`}
           >
-            {isProductInWishlist ? <LiaHeartSolid /> : <LiaHeart />}
+            {isFavorite ? <LiaHeartSolid /> : <LiaHeart />}
             wishlist
           </span>
         </div>

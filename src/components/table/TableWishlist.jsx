@@ -11,7 +11,7 @@ import {
   where,
 } from "firebase/firestore";
 import { toast } from "react-toastify";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { db } from "../../config/firebaseConfigure";
 import { displayWishlist } from "../../redux/slice/storeSlice";
 import { useAddProduct } from "../../hooks/useAddProduct";
@@ -21,6 +21,7 @@ const TABLE_HEAD = ["Product", "Price", "Stock Status", ""];
 const TableWishlist = ({ Wishlists }) => {
   const { user } = useSelector((state) => state.auth);
   const { handleAddItem } = useAddProduct();
+  const dispatch = useDispatch();
   const handleDeleteWishlist = async (productId) => {
     try {
       const wishlistRef = collection(db, "wishlists");

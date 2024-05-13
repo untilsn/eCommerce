@@ -10,7 +10,6 @@ import { useFormatDate } from "./useFormatDate";
 export function useDataFetcher() {
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log("qưehưeqhiqewihuqưeiuqew");
     try {
       async function fetchData() {
         const q = query(

@@ -6,7 +6,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { v4 } from "uuid";
-import { useFetchCategory } from "../../hooks/useFetchCategory";
+import { useFetchProductCategory } from "../../hooks/useFetchProductCategory";
 import { IoIosArrowDown, IoMdArrowDropup } from "react-icons/io";
 
 function Icon({ id, open }) {
@@ -36,7 +36,7 @@ const ShopCategory = () => {
 
   const [selectCategory, setSelectCategory] = useState("");
   const [openAcc1, setOpenAcc1] = useState(true);
-  useFetchCategory(selectCategory);
+  useFetchProductCategory(selectCategory);
   const handleOpenAcc1 = () => setOpenAcc1(!openAcc1);
   return (
     <div>

@@ -22,7 +22,7 @@ const ShopReview = () => {
           navigation
           pagination={{ clickable: true }}
         >
-          {products.map((item) => (
+          {products.slice(0, 8).map((item) => (
             <SwiperSlide key={v4()}>
               <CardItem item={item}></CardItem>
             </SwiperSlide>

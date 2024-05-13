@@ -3,21 +3,17 @@ import { ReviewIcon } from "./CardItem";
 import { v4 } from "uuid";
 import { PiBinocularsBold } from "react-icons/pi";
 import { FaCartPlus } from "react-icons/fa";
-
 import { MdCompareArrows } from "react-icons/md";
 import { FaHeart, FaRegHeart } from "react-icons/fa6";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 import { useAddProduct } from "../../hooks/useAddProduct";
+import { useCheckFavorite } from "../../hooks/useCheckFavorite";
 
 const CardShop = ({ item }) => {
   if (!item) return;
   const [isHovered, setIsHovered] = useState(false);
-  const { wishlistArray } = useSelector((state) => state.store);
-  const isProductInWishlist = wishlistArray?.some(
-    (wishlistItem) => wishlistItem.productId === item.productId
-  );
   const { handleAddItem } = useAddProduct("wishlists");
+  const isFavorite = useCheckFavorite(item);
 
   return (
     <div
@@ -26,7 +22,7 @@ const CardShop = ({ item }) => {
       className="z-0 transition-all shadow-sm hover:shadow-itemShadow group"
     >
       <div className="-z-10 max-w-[204px] w-full h-[210px] relative transition-all ">
-        <Link to={`/product?id=${item.productId}`}>
+        <NavLink to={`/product?id=${item.productId}`}>
           <img
             className={`${
               item.category === "unknown" ? "" : "" //? NSFW feature
@@ -34,13 +30,13 @@ const CardShop = ({ item }) => {
             src={isHovered ? item?.images[2] : item?.images[0]}
             alt="img-item"
           />
-        </Link>
+        </NavLink>
         <div className="absolute flex flex-col gap-3 text-sm top-5 right-4 transition-all opacity-0  group-hover:opacity-90 -translate-x-[50%] group-hover:translate-x-[5%]">
           <div
             onClick={() => handleAddItem(item, "wishlists")} //?add wishlists
-            className={`${isProductInWishlist} block p-2 bg-white rounded-full shadow hover:bg-yellowColor hover:text-white group text-yellowColor`}
+            className={`${isFavorite} block p-2 bg-white rounded-full shadow hover:bg-yellowColor hover:text-white group text-yellowColor`}
           >
-            {isProductInWishlist ? <FaHeart /> : <FaRegHeart />}
+            {isFavorite ? <FaHeart /> : <FaRegHeart />}
           </div>
           <div className="block p-2 bg-white rounded-full shadow hover:bg-yellowColor hover:text-white text-yellowColor">
             <PiBinocularsBold />

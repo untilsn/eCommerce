@@ -11,48 +11,21 @@ import PageStyles from "./pages/PageStyles";
 import DashboardMainPage from "./pages/manage/DashboardMainPage";
 import DashboardProduct from "./pages/manage/DashboardProduct";
 import DashboardCategory from "./pages/manage/DashboardCategory";
-import { useDispatch, useSelector } from "react-redux";
-import { auth, db } from "./config/firebaseConfigure";
-import { loginSuccess } from "./redux/slice/authSlice";
-import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import AddCategories from "./pages/manage/AddCategories";
 import AddProducts from "./pages/manage/AddProducts";
-import { collection, onSnapshot } from "firebase/firestore";
-import { displayCategories } from "./redux/slice/storeSlice";
 import BlogPage from "./pages/BlogPage";
 import { useFetchingWishlists } from "./hooks/useFetchingWishlists";
 import { useFetchingProducts } from "./hooks/useFetchingProducts";
 import { useDataFetcher } from "./hooks/useFetchData";
+import { useFetchCategory } from "./hooks/useFeatchCategory";
+import { useDataUser } from "./hooks/useDataUser";
 
 function App() {
-  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
+  useDataUser(user);
   useDataFetcher();
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        dispatch(loginSuccess(user));
-      } else {
-        dispatch(loginSuccess(null));
-      }
-    });
-    return () => unsubscribe();
-  }, [user]);
-
-  useEffect(() => {
-    const categoryRef = collection(db, "categories");
-    onSnapshot(categoryRef, (snapshot) => {
-      let result = [];
-      console.log(result);
-      snapshot.forEach((category) => {
-        result.push({
-          id: category.id,
-          ...category.data(),
-        });
-      });
-      dispatch(displayCategories(result));
-    });
-  }, []);
+  useFetchCategory();
   useFetchingWishlists(user);
   useFetchingProducts(user);
 

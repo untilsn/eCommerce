@@ -25,7 +25,7 @@ const TrendProduct = () => {
           pagination={{ clickable: true }}
           className="h-[360px]"
         >
-          {products.map((item) => (
+          {products.slice(0, 5).map((item) => (
             <SwiperSlide key={v4()}>
               <CardItem
                 classes="!h-[200px]"

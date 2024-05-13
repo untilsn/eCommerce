@@ -11,7 +11,6 @@ import { db } from "../config/firebaseConfigure";
 
 export function useQueryData(productId) {
   const [detailItem, setDetailItem] = useState("");
-  console.log(detailItem);
   useEffect(() => {
     if (!productId) return;
 

@@ -5,7 +5,7 @@ import ActionEdit from "../../components/action/ActionEdit";
 import ActionDelete from "../../components/action/ActionDelete";
 import { Chip, Typography, Card } from "@material-tailwind/react";
 import { useSelector } from "react-redux";
-import { useFetchCategory } from "../../hooks/useFetchCategory";
+import { useFetchProductCategory } from "../../hooks/useFetchProductCategory";
 import Pagination from "../../components/pagination/Pagination";
 const TABLE_HEAD = ["id", "name", "slug", "status", "action"];
 const TABLE_ROWS = [
@@ -61,7 +61,7 @@ const TABLE_ROWS = [
   },
 ];
 const DashboardCategory = () => {
-  useFetchCategory();
+  useFetchProductCategory();
   const { categories } = useSelector((state) => state.store);
   const [itemPerPage, setItemPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);

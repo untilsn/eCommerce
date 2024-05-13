@@ -15,12 +15,11 @@ const ProductPage = () => {
 
   const [detailItem] = useQueryData(productId);
 
-  console.log(detailItem);
   return (
     <div>
       <Breadcrumb children="product"></Breadcrumb>
       <div className="container">
-        <ProductDetail item={detailItem}></ProductDetail>
+        <ProductDetail productId={productId} item={detailItem}></ProductDetail>
         <ProductDesc item={detailItem}></ProductDesc>
         <ShopRelative></ShopRelative>
       </div>

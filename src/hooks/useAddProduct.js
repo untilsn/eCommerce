@@ -2,7 +2,6 @@ import {
   addDoc,
   collection,
   getDocs,
-  onSnapshot,
   query,
   serverTimestamp,
   where,
