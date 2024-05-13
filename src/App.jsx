@@ -20,6 +20,7 @@ import { useFetchingProducts } from "./hooks/useFetchingProducts";
 import { useDataFetcher } from "./hooks/useFetchData";
 import { useFetchCategory } from "./hooks/useFeatchCategory";
 import { useDataUser } from "./hooks/useDataUser";
+import DashboardUser from "./pages/manage/DashboardUser";
 
 function App() {
   const { user } = useSelector((state) => state.auth);
@@ -28,7 +29,6 @@ function App() {
   useFetchCategory();
   useFetchingWishlists(user);
   useFetchingProducts(user);
-
   return (
     <>
       <Routes>
@@ -66,6 +66,10 @@ function App() {
           <Route
             path="/manage/add-categories"
             element={<AddCategories></AddCategories>}
+          ></Route>
+          <Route
+            path="/manage/user"
+            element={<DashboardUser></DashboardUser>}
           ></Route>
         </Route>
       </Routes>

@@ -99,7 +99,10 @@ const BlogPage = () => {
                 </TitlePath>
                 <div className="flex flex-wrap gap-5 grid-a">
                   {CategoryList.map((item) => (
-                    <div className="block p-3 border bg-gray bg-opacity-5 border-gray border-opacity-20 text-dark text-opacity-65">
+                    <div
+                      key={item}
+                      className="block p-3 border bg-gray bg-opacity-5 border-gray border-opacity-20 text-dark text-opacity-65"
+                    >
                       {item}
                     </div>
                   ))}

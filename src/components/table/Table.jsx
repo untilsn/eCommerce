@@ -18,7 +18,6 @@ import { Link } from "react-router-dom";
 const TABLE_HEAD = ["product", "price", "quantity", "total"];
 
 const Table = ({ item }) => {
-  console.log(item);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const initialQuantities = {};
@@ -116,7 +115,7 @@ const Table = ({ item }) => {
           {item.map((doc) => {
             const total = totalPrices[doc.productId] || 0;
             return (
-              <tr key={doc.id}>
+              <tr key={doc.productId}>
                 <td className="p-4 max-w-[440px]">
                   <Typography
                     variant="small"

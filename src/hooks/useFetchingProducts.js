@@ -16,7 +16,7 @@ export function useFetchingProducts(user) {
       try {
         const wishlistsQuery = query(
           collection(db, "carts"),
-          where("userId", "==", user.uid)
+          where("userId", "==", user.id)
         );
 
         const snapshotListener = onSnapshot(wishlistsQuery, (snapshot) => {

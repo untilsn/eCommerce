@@ -1,5 +1,4 @@
 import React from "react";
-import subBanner from "F:/code/eCommerce-redux/public/sub-banner1.jpg";
 import BoxInfoSubBanner from "./path/BoxInfoSubBanner";
 const SubBanner = ({ img, content }) => {
   return (

@@ -21,7 +21,7 @@ export function useAddProduct() {
       const unsubscribe = await getDocs(
         query(
           docRef,
-          where("userId", "==", user?.uid),
+          where("userId", "==", user?.id),
           where("productId", "==", item?.productId)
         )
       );
@@ -32,7 +32,7 @@ export function useAddProduct() {
       // Add wishlist item if it doesn't exist
       const wishlistDocRef = collection(db, type);
       addDoc(wishlistDocRef, {
-        userId: user.uid,
+        userId: user.id,
         productId: item.productId,
         timeAdded: serverTimestamp(),
         category: item.category,

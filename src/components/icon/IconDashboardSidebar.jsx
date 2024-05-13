@@ -120,7 +120,7 @@ export const sidebarLinks = [
     title: "User",
     accuUrl: "/manage/user",
     accTitle1: "Users manage",
-    url: "/manage/product",
+    url: "/manage/user",
     accIcon1: (
       <svg
         xmlns="http://www.w3.org/2000/svg"

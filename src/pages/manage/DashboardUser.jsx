@@ -1,25 +1,42 @@
-import React, { Fragment, useState } from "react";
+import { collection, onSnapshot } from "firebase/firestore";
+import React, { Fragment, useEffect, useState } from "react";
+import { db } from "../../config/firebaseConfigure";
 import DashboardHeading from "../../modules/dashboard/DashboardHeading";
+import { Card, Chip, Typography } from "@material-tailwind/react";
 import ActionView from "../../components/action/ActionView";
 import ActionEdit from "../../components/action/ActionEdit";
 import ActionDelete from "../../components/action/ActionDelete";
-import { Chip, Typography, Card } from "@material-tailwind/react";
-import { useSelector } from "react-redux";
-import { useFetchProductCategory } from "../../hooks/useFetchProductCategory";
 import Pagination from "../../components/pagination/Pagination";
-const TABLE_HEAD = ["id", "name", "slug", "status", "action"];
+const TABLE_HEAD = ["id", "displayname", "email", "status", "action"];
 
-const DashboardCategory = () => {
-  useFetchProductCategory();
-  const { categories } = useSelector((state) => state.store);
+const DashboardUser = () => {
+  const [userList, setUserList] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const filterUser = userList.filter((user) => user.displayName != searchTerm);
+
   const [itemPerPage, setItemPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchTerm, setSearchTerm] = useState("");
-  const filterCategories = categories.filter((category) =>
-    category.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+
   const lastPostIndex = currentPage * itemPerPage;
   const firstPostIndex = lastPostIndex - itemPerPage;
+  useEffect(() => {
+    try {
+      const userRef = collection(db, "users");
+      let result = [];
+      onSnapshot(userRef, (snapshot) =>
+        snapshot.forEach(
+          (doc) =>
+            result.push({
+              id: doc.id,
+              ...doc.data(),
+            }),
+          setUserList(result)
+        )
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
   return (
     <Fragment>
       <div className="flex items-center justify-between">
@@ -56,10 +73,10 @@ const DashboardCategory = () => {
             </tr>
           </thead>
           <tbody>
-            {filterCategories
+            {filterUser
               .slice(firstPostIndex, lastPostIndex)
               .map((item, index) => {
-                const isLast = index === filterCategories.length - 1;
+                const isLast = index === filterUser.length - 1;
                 const classes = isLast ? "p-4" : "p-4 border-b border-gray-50";
                 return (
                   <tr
@@ -82,7 +99,7 @@ const DashboardCategory = () => {
                         className="text-sm font-normal"
                       >
                         <span className="font-medium capitalize">
-                          {item?.name}
+                          {item?.displayName}
                         </span>
                       </Typography>
                     </td>
@@ -92,7 +109,7 @@ const DashboardCategory = () => {
                         color="gray"
                         className="text-sm font-normal "
                       >
-                        <span>{item?.slug}</span>
+                        <span>{item?.email}</span>
                       </Typography>
                     </td>
 
@@ -101,8 +118,14 @@ const DashboardCategory = () => {
                         <Chip
                           size="lg"
                           variant="ghost"
-                          value="Approved"
-                          color="green"
+                          value={item?.role}
+                          color={
+                            item?.role === "admin"
+                              ? "green"
+                              : item?.role === "mods"
+                              ? "amber"
+                              : "blue"
+                          }
                         />
                       </div>
                     </td>
@@ -126,7 +149,7 @@ const DashboardCategory = () => {
         </table>
       </Card>
       <Pagination
-        totalPost={filterCategories?.length}
+        totalPost={filterUser?.length}
         currentPage={currentPage}
         postPerPage={itemPerPage}
         setCurrentPage={setCurrentPage}
@@ -135,4 +158,4 @@ const DashboardCategory = () => {
   );
 };
 
-export default DashboardCategory;
+export default DashboardUser;

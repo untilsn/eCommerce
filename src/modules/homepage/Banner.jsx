@@ -1,6 +1,6 @@
 import React from "react";
-import mainBanner from "F:/code/eCommerce-redux/public/main-banner1.jpg";
-import secondBanner from "F:/code/eCommerce-redux/public/main-banner2.jpg";
+import mainBanner from "/public/main-banner1.jpg";
+import secondBanner from "/public/main-banner2.jpg";
 import { BannerImage } from "../../utils/bannerItem";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Scrollbar, A11y } from "swiper/modules";
