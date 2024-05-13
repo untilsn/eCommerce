@@ -1,5 +1,5 @@
 import React from "react";
-import shopBanner from "/code/eCommerce-redux/public/shopbanner.jpg";
+import shopBanner from "/public/shopbanner.jpg";
 const ShopBanner = ({ title = "list", subtitle = "shop" }) => {
   return (
     <div
