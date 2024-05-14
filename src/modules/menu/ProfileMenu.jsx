@@ -1,6 +1,6 @@
 import React from "react";
 import { FaAngleRight } from "react-icons/fa6";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/slice/authSlice";
 import { toast } from "react-toastify";
 import { auth } from "../../config/firebaseConfigure";
@@ -9,6 +9,7 @@ import { displayCart, displayWishlist } from "../../redux/slice/storeSlice";
 import { signOut } from "firebase/auth";
 
 const ProfileMenu = () => {
+  const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogout = () => {
@@ -24,15 +25,20 @@ const ProfileMenu = () => {
   return (
     <div className=" h-[500xp] bg-white shadow-md absolute top-[100%] p-10 left-0 w-[300px]">
       <div className="flex flex-col w-full gap-3">
-        <Link
-          to="/manage"
-          className="flex items-center justify-between w-full text-sm hover:text-yellowColor text-gray text-opacity-90"
-        >
-          <span>manage</span>
-          <span>
-            <FaAngleRight className="text-sm" />
-          </span>
-        </Link>
+        {user?.role === "admin" ? (
+          <Link
+            to="/manage"
+            className="flex items-center justify-between w-full text-sm hover:text-yellowColor text-gray text-opacity-90"
+          >
+            <span>manage</span>
+            <span>
+              <FaAngleRight className="text-sm" />
+            </span>
+          </Link>
+        ) : (
+          ""
+        )}
+
         <div
           onClick={handleLogout}
           className="flex items-center justify-between w-full text-sm hover:text-yellowColor text-grayDark "

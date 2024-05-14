@@ -1,5 +1,5 @@
 import React from "react";
-import dealBanner from "/code/eCommerce-redux/public/dealoutletbanner.jpg";
+import dealBanner from "/public/dealoutletbanner.jpg";
 import CardItem from "../../components/card/CardItem";
 import ButtonItem from "../../components/button/ButtonItem";
 import TitlePath from "../../components/title/TitlePath";

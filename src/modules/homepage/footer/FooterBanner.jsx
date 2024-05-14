@@ -1,5 +1,5 @@
 import React from "react";
-import footerBanner from "/code/eCommerce-redux/public/footerbanner.jpg";
+import footerBanner from "/public/footerbanner.jpg";
 import { FaArrowRightLong } from "react-icons/fa6";
 
 import { FooterIconContact } from "../../../components/icon/IconContact";
