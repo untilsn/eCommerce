@@ -1,10 +1,10 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
+import { GoogleAuthProvider, getAuth } from "firebase/auth";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBwbbHb0L-Jy56NZfpSqQv696xT6452B9U",
+  apiKey: import.meta.env.VITE_REACT_APP_API_KEY,
   authDomain: "e-commerce-54506.firebaseapp.com",
   projectId: "e-commerce-54506",
   storageBucket: "e-commerce-54506.appspot.com",
@@ -13,6 +13,9 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app);
-export const auth = getAuth(app);
-export const storage = getStorage(app);
+const db = getFirestore(app);
+const auth = getAuth(app);
+const storage = getStorage(app);
+const provider = new GoogleAuthProvider();
+
+export { db, auth, storage, provider };

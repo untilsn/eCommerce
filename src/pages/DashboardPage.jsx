@@ -9,11 +9,13 @@ import { toast } from "react-toastify";
 
 const DashboardPage = () => {
   const { user } = useSelector((state) => state.auth);
+  console.log(user.role);
   const navigate = useNavigate();
   useEffect(() => {
-    if (user.role !== "admin")
+    if (user.role !== "admin") {
       toast.warning("you dont have right to manage page");
-    navigate("/"); // Navigate to home page
+      navigate("/"); // Navigate to home page
+    }
 
     return;
   }, []);

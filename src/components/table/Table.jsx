@@ -71,7 +71,7 @@ const Table = ({ item }) => {
       const queryWishlists = query(
         wishlistRef,
         where("productId", "==", productId),
-        where("userId", "==", user.uid)
+        where("userId", "==", user.id)
       );
       const querySnapshot = await getDocs(queryWishlists);
       if (!querySnapshot.empty) {
@@ -129,7 +129,7 @@ const Table = ({ item }) => {
                       >
                         <img
                           className="object-contain w-full h-full "
-                          src={doc?.images[1]}
+                          src={doc?.images[0]}
                           alt="img"
                         />
                       </Link>

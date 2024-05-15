@@ -20,22 +20,22 @@ const TABLE_HEAD = ["Product", "Price", "Stock Status", ""];
 
 const TableWishlist = ({ Wishlists }) => {
   const { user } = useSelector((state) => state.auth);
+  console.log(user);
   const { handleAddItem } = useAddProduct();
   const dispatch = useDispatch();
   const handleDeleteWishlist = async (productId) => {
+    console.log(productId);
     try {
       const wishlistRef = collection(db, "wishlists");
       const queryWishlists = query(
         wishlistRef,
         where("productId", "==", productId),
-        where("userId", "==", user.uid)
+        where("userId", "==", user.id)
       );
       const querySnapshot = await getDocs(queryWishlists);
       if (!querySnapshot.empty) {
         const doc = querySnapshot.docs[0];
         await deleteDoc(doc.ref);
-        console.log("Document successfully deleted!");
-        toast.success("remove success");
         const updatedWishlists = [...Wishlists].filter(
           (item) => item.productId !== productId
         );
@@ -48,6 +48,11 @@ const TableWishlist = ({ Wishlists }) => {
     } catch (error) {
       console.error("Error removing document: ", error);
     }
+  };
+
+  const handleAddCartWishlist = (item) => {
+    handleAddItem(item, "carts");
+    handleDeleteWishlist(item.productId);
   };
 
   return (
@@ -124,7 +129,7 @@ const TableWishlist = ({ Wishlists }) => {
                   <td className={`${classes} max-w-[270px]`}>
                     <div className="flex items-center gap-8 text-sm font-medium text-center text-yellowColor w-[270px]">
                       <span
-                        onClick={() => handleAddItem(item, "carts")}
+                        onClick={() => handleAddCartWishlist(item)}
                         className="flex items-center justify-center gap-5 p-4 uppercase bg-white border border-gray border-opacity-20 text-yellowColor max-w-[250px] w-full  hover:bg-yellowColor hover:text-white"
                       >
                         <span>

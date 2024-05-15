@@ -9,11 +9,17 @@ import { openModalAuth, registerStart } from "../../redux/slice/authSlice";
 import { toast } from "react-toastify";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth, db } from "../../config/firebaseConfigure";
+import {
+  createUserWithEmailAndPassword,
+  signInWithPopup,
+  updateProfile,
+} from "firebase/auth";
+import { auth, db, provider } from "../../config/firebaseConfigure";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 const Register = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const schema = yup.object({
     email: yup
       .string()
@@ -64,7 +70,16 @@ const Register = () => {
       console.log(error);
     }
   };
-
+  const handleRegisterGoogle = async () => {
+    try {
+      await signInWithPopup(auth, provider);
+      window.location.href = "/";
+      dispatch(openModalAuth(false));
+      toast.success("login with google success!");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <form onSubmit={handleSubmit(handleRegister)}>
       <div className="flex flex-col gap-5 py-5">
@@ -118,8 +133,11 @@ const Register = () => {
       </div>
       <div className="w-full h-[1px] bg-slate-300"></div>
       <div className="p-4 text-sm text-center">or sign in with</div>
-      <div className="flex items-center justify-between gap-20">
-        <div className="flex items-center justify-center w-full gap-3 p-3 border hover:bg-gray hover:bg-opacity-10 border-gray">
+      <div className="flex items-center justify-center gap-20">
+        <button
+          onClick={() => handleRegisterGoogle()}
+          className="flex items-center justify-center mt-5 max-w-[300px] w-full rounded-3xl hover:border-opacity-30 gap-3 p-3 border hover:bg-gray hover:bg-opacity-5 border-gray border-opacity-20"
+        >
           <span>
             <img
               src="./google.png"
@@ -128,17 +146,7 @@ const Register = () => {
             />
           </span>
           <span>Login with Google</span>
-        </div>
-        <div className="flex items-center justify-center w-full gap-3 p-3 border hover:bg-gray hover:bg-opacity-10 border-gray">
-          <span>
-            <img
-              src="./google.png"
-              className="object-cover w-6 h-6"
-              alt="google"
-            />
-          </span>
-          <span>Login with Google</span>
-        </div>
+        </button>
       </div>
     </form>
   );

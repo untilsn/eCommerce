@@ -4,7 +4,7 @@ import InputForm from "../../components/input/InputForm";
 import InputContaint from "../../components/input/InputContaint";
 import Label from "../../components/label/Label";
 import ButtonForm from "../../components/button/ButtonForm";
-import { auth } from "../../config/firebaseConfigure";
+import { auth, provider } from "../../config/firebaseConfigure";
 import { useDispatch, useSelector } from "react-redux";
 import {
   loginFailure,
@@ -12,10 +12,10 @@ import {
   openModalAuth,
 } from "../../redux/slice/authSlice";
 import { toast } from "react-toastify";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useNavigation } from "react-router-dom";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -58,6 +58,17 @@ const Login = () => {
       console.log(error);
     }
   };
+  const handleLoginGoogle = async () => {
+    try {
+      await signInWithPopup(auth, provider);
+      window.location.href = "/";
+      dispatch(openModalAuth(false));
+      toast.success("login with google success!");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <form onSubmit={handleSubmit(handleLogin)}>
       <div className="flex flex-col gap-5 py-5">
@@ -100,8 +111,11 @@ const Login = () => {
       </div>
       <div className="w-full h-[1px] bg-slate-300"></div>
       <div className="p-4 text-sm text-center">or sign in with</div>
-      <div className="flex items-center justify-between gap-20">
-        <div className="flex items-center justify-center w-full gap-3 p-3 border hover:bg-gray hover:bg-opacity-10 border-gray">
+      <div className="flex items-center justify-center gap-20">
+        <button
+          onClick={() => handleLoginGoogle()}
+          className="flex items-center justify-center mt-5 max-w-[300px] w-full rounded-3xl hover:border-opacity-30 gap-3 p-3 border hover:bg-gray hover:bg-opacity-5 border-gray border-opacity-20"
+        >
           <span>
             <img
               src="./google.png"
@@ -110,17 +124,7 @@ const Login = () => {
             />
           </span>
           <span>Login with Google</span>
-        </div>
-        <div className="flex items-center justify-center w-full gap-3 p-3 border hover:bg-gray hover:bg-opacity-10 border-gray">
-          <span>
-            <img
-              src="./google.png"
-              className="object-cover w-6 h-6"
-              alt="google"
-            />
-          </span>
-          <span>Login with Google</span>
-        </div>
+        </button>
       </div>
     </form>
   );

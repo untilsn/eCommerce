@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { v4 } from "uuid";
-import { FaCartPlus } from "react-icons/fa";
+import { FaCartPlus, FaHeart } from "react-icons/fa";
 import { BiSolidBinoculars } from "react-icons/bi";
 import { FaRegHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useCheckCart } from "../../hooks/useCheckCart";
+import { useCheckFavorite } from "../../hooks/useCheckFavorite";
 
 export const ReviewIcon = () => {
   return (
@@ -30,6 +32,8 @@ const CardItem = ({ item, classes }) => {
   const handleNotHoverImage = () => {
     setIsHover(false);
   };
+  const isCart = useCheckCart(item);
+  const isFavorite = useCheckFavorite(item);
   return (
     <div
       onMouseEnter={handleHoverImage}
@@ -37,7 +41,7 @@ const CardItem = ({ item, classes }) => {
       className={`group hover:shadow-itemShadow relative max-w-[370px] w-full h-[450px] border border-gray border-opacity-15 bg-white ${classes}`}
     >
       <div className="relative w-full overflow-hidden ">
-        <Link to={`/product?id=${item?.id}`}>
+        <Link to={`/product?id=${item?.productId}`}>
           <div
             className={`relative w-full h-[276px] overflow-hidden ${classes}`}
           >
@@ -63,7 +67,11 @@ const CardItem = ({ item, classes }) => {
         </Link>
         {/* Heart icon */}
         <div className="absolute p-3 rounded-full right-6 top-6 bg-yellowColor transition-all opacity-0 group-hover:opacity-90 -translate-x-[50%] group-hover:translate-x-[5%] ">
-          <FaRegHeart />
+          {isFavorite ? (
+            <FaHeart className="text-dark"></FaHeart>
+          ) : (
+            <FaRegHeart />
+          )}
         </div>
         {/* Cart and Binoculars icons */}
         <div
@@ -71,7 +79,11 @@ const CardItem = ({ item, classes }) => {
           translate-y-[100%]  group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all"
         >
           <div>
-            <FaCartPlus className="hover:text-yellowColor" />
+            <FaCartPlus
+              className={`${
+                isCart === true ? "text-yellowColor" : "text-white"
+              } hover:text-yellowColor`}
+            />
           </div>
           <hr className="h-[60%] w-[1px] bg-white" />
           <div>

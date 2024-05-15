@@ -2,7 +2,7 @@ import React from "react";
 import menuImg from "/public/menu-img.jpg";
 const MenuShop = () => {
   return (
-    <div className="flex justify-start items-start overflow-hidden  h-[350px] bg-white shadow-md absolute top-[100%] left-0 w-[450px]">
+    <div className="flex justify-between items-start overflow-hidden  h-[350px] bg-white shadow-md absolute top-[100%] left-0 w-[450px]">
       <div className="grid h-auto grid-cols-1 p-10 capitalize">
         {/* 11 */}
         <div className="flex flex-col gap-4">

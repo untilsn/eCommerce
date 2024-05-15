@@ -6,7 +6,7 @@ export const iconHeaderList = [
   {
     icon: <MdCompareArrows className="text-3xl" />,
     title: "compare",
-    url: "/compare",
+    url: "",
   },
   {
     icon: <IoMdHeartEmpty className="text-3xl" />,
