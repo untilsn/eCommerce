@@ -5,7 +5,7 @@ const CardReview = () => {
     <div className="max-w-[250px] w-full h-[360px]">
       <img
         className="object-contain w-full h-full"
-        src="./public/cardreiview.jpg"
+        src="/public/cardreiview.jpg"
         alt=""
       />
     </div>
