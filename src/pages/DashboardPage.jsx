@@ -9,7 +9,6 @@ import { toast } from "react-toastify";
 
 const DashboardPage = () => {
   const { user } = useSelector((state) => state.auth);
-  console.log(user.role);
   const navigate = useNavigate();
   useEffect(() => {
     if (user.role !== "admin") {

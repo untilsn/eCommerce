@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import InputContaint from "../../components/input/InputContaint";
 import InputForm from "../../components/input/InputForm";
 import { Option, Radio, Select } from "@material-tailwind/react";
@@ -11,20 +11,31 @@ import { v4 } from "uuid";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useFirebaseImage } from "../../hooks/useFirebaseImage";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  query,
+  serverTimestamp,
+  updateDoc,
+  where,
+} from "firebase/firestore";
 import { db } from "../../config/firebaseConfigure";
 import Description from "../../components/quill/Description";
+import { useSearchParams } from "react-router-dom";
+import { useQueryData } from "../../hooks/useQueryData";
 
-const productStatus = ["approved", "pedding", "reject"];
+const productStatus = ["approved", "pending", "reject"];
 
-const AddProducts = () => {
+const DashboardUpdateProduct = () => {
+  const [idProduct] = useSearchParams();
+  const getIdProduct = idProduct.get("id");
   const { categories } = useSelector((state) => state.store);
   const { user } = useSelector((state) => state.auth);
   const [url, setUrl] = useState("");
-  const [urls, setUrls] = useState([]);
+  const [urls, setUrls] = useState([]); // Ensure urls is an array
   const [comment, setComment] = useState("");
 
-  const { control, watch, setValue, getValues, handleSubmit, reset } = useForm({
+  const { control, setValue, getValues, handleSubmit, reset } = useForm({
     mode: "onChange",
     defaultValues: {
       images: [],
@@ -46,18 +57,17 @@ const AddProducts = () => {
   const handleStatus = (status) => {
     setSelectStatus(status);
   };
-  const {
-    progress,
-    image,
-    handleSelectImage,
-    handleRemoveImage,
-    handleResetUpload,
-  } = useFirebaseImage(setValue, getValues);
+  const { image, handleSelectImage, handleRemoveImage } = useFirebaseImage(
+    setValue,
+    getValues
+  );
+
   const handleDeleteImage = (url) => {
     handleRemoveImage(url);
   };
+
   const handleAddUrl = () => {
-    if (urls.length > 5) return toast.error("only 5 images or less");
+    if (urls.length > 5) return toast.error("Only 5 images or less");
     if (urls.some((item) => item === url)) {
       setUrl("");
       return;
@@ -71,51 +81,67 @@ const AddProducts = () => {
   const handleValueChange = (e) => {
     setUrl(e.target.value);
   };
+
   const combinedImages = [...image, ...urls];
+
   const handleAddProducts = async (values) => {
     if (!values || !user) return;
-    if (!image && !urls) {
+    if (!image.length && !urls.length) {
       console.log("Bạn cần phải cung cấp urls nếu không có image.");
       return;
     }
     try {
-      const docRef = collection(db, "products");
-      await addDoc(docRef, {
+      const collectionRef = collection(db, "products");
+      const queryDoc = query(
+        collectionRef,
+        where("productId", "==", getIdProduct)
+      );
+      const querySnapshot = await getDocs(queryDoc);
+
+      if (querySnapshot.empty) {
+        console.log("Không tìm thấy sản phẩm.");
+        return;
+      }
+
+      const docRef = querySnapshot.docs[0].ref;
+      await updateDoc(docRef, {
         title: values.title,
         images: combinedImages,
         category: selectedCategory,
         desc: comment,
-        // user: user?.uid,
         createAt: serverTimestamp(),
         stock: Number(values.stock),
         price: Number(values.price),
         status: selectStatus,
-        reviews: [],
-        productId: v4(),
       });
 
-      toast.success("add products success");
-      reset();
-      setSelectStatus("");
-      setSelectedCategory("");
-      setUrls([]);
-      setComment("");
-      handleResetUpload();
+      toast.success("Cập nhật sản phẩm thành công");
     } catch (error) {
       console.log(error);
     }
   };
 
-  const handleRemoveUrl = (urlItem, index) => {
+  const handleRemoveUrl = (urlItem) => {
     const newUrls = urls.filter((url) => url !== urlItem);
     setUrls(newUrls);
   };
 
+  const [detailItem] = useQueryData(getIdProduct);
+
+  useEffect(() => {
+    if (detailItem) {
+      reset(detailItem);
+      setUrls(detailItem.images || []); // Ensure detailItem.images is an array
+      setSelectedCategory(detailItem.category || "");
+      setComment(detailItem.desc || "");
+      setSelectStatus(detailItem.status || "");
+    }
+  }, [detailItem, reset]);
+
   return (
     <Fragment>
-      <DashboardHeading>Create Products</DashboardHeading>
-
-      <form className="mt-10 " onSubmit={handleSubmit(handleAddProducts)}>
+      <DashboardHeading>Products (Update)</DashboardHeading>
+      <form className="mt-10" onSubmit={handleSubmit(handleAddProducts)}>
         <div className="grid grid-cols-2 mb-10 gap-x-10 gap-y-16">
           <InputContaint>
             <InputForm
@@ -163,7 +189,7 @@ const AddProducts = () => {
             <ol
               type="1"
               start="1"
-              className="flex flex-col max-h-[550px] overflow-y-auto gap-3 p-5 bg-white border rounded-md border-dark border-opacity-20 "
+              className="flex flex-col max-h-[550px] overflow-y-auto gap-3 p-5 bg-white border rounded-md border-dark border-opacity-20"
             >
               {urls.map((url, index) => (
                 <li
@@ -221,17 +247,11 @@ const AddProducts = () => {
         {/* description */}
         <Description comment={comment} setComment={setComment}></Description>
         <div className="flex items-center justify-center w-full mx-auto mt-20">
-          <Button
-            type="submit"
-            // $isloading={loading}
-            // disabled={loading}
-          >
-            Add Product
-          </Button>
+          <Button type="submit">Add Product</Button>
         </div>
       </form>
     </Fragment>
   );
 };
 
-export default AddProducts;
+export default DashboardUpdateProduct;

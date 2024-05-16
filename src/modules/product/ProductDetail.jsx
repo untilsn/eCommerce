@@ -113,7 +113,7 @@ const ProductDetail = ({ item, productId }) => {
         </div>
         {/* category */}
         <div className="py-5 text-sm font-light border-t text-gray border-gray border-opacity-2">
-          category: women
+          category: {item?.category}
         </div>
         {/* share */}
         <div className="flex items-center gap-3 text-sm capitalize">

@@ -6,6 +6,7 @@ import ActionDelete from "../../components/action/ActionDelete";
 import { Chip, Typography, Card } from "@material-tailwind/react";
 import { useSelector } from "react-redux";
 import Pagination from "../../components/pagination/Pagination";
+import { useNavigate } from "react-router-dom";
 const TABLE_HEAD = [
   "id",
   "product",
@@ -16,6 +17,7 @@ const TABLE_HEAD = [
 ];
 
 const DashboardProduct = () => {
+  const navigate = useNavigate();
   const { products } = useSelector((state) => state.store);
   const [searchTerm, setSearchTerm] = useState("");
   const filterProducts = products.filter((product) =>
@@ -25,6 +27,7 @@ const DashboardProduct = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const lastPostIndex = currentPage * itemPerPage;
   const firstPostIndex = lastPostIndex - itemPerPage;
+
   return (
     <Fragment>
       <div className="flex items-center justify-between">
@@ -156,7 +159,13 @@ const DashboardProduct = () => {
                       >
                         <span className="flex items-center justify-center gap-3">
                           <ActionView></ActionView>
-                          <ActionEdit></ActionEdit>
+                          <ActionEdit
+                            onClick={() =>
+                              navigate(
+                                `/manage/products/update?id=${item.productId}`
+                              )
+                            }
+                          ></ActionEdit>
                           <ActionDelete></ActionDelete>
                         </span>
                       </Typography>

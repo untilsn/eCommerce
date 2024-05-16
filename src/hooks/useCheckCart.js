@@ -5,6 +5,5 @@ export function useCheckCart(item) {
   const isCart = cartArray.some(
     (items, index) => items.productId == item.productId
   );
-  console.log(isCart);
   return isCart;
 }

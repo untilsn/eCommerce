@@ -4,7 +4,7 @@ import InputForm from "../../components/input/InputForm";
 import InputContaint from "../../components/input/InputContaint";
 import Label from "../../components/label/Label";
 import ButtonForm from "../../components/button/ButtonForm";
-import { auth, provider } from "../../config/firebaseConfigure";
+import { auth, db, provider } from "../../config/firebaseConfigure";
 import { useDispatch, useSelector } from "react-redux";
 import {
   loginFailure,
@@ -16,6 +16,12 @@ import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate, useNavigation } from "react-router-dom";
+import {
+  addDoc,
+  collection,
+  onSnapshot,
+  serverTimestamp,
+} from "firebase/firestore";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -60,8 +66,16 @@ const Login = () => {
   };
   const handleLoginGoogle = async () => {
     try {
-      await signInWithPopup(auth, provider);
-      window.location.href = "/";
+      const user = await signInWithPopup(auth, provider);
+
+      const userRef = collection(db, "users");
+      await addDoc(userRef, {
+        displayName: user.user.displayName,
+        email: user.user.email,
+        role: "user",
+        createAt: serverTimestamp(),
+      });
+      // window.location.href = "/";
       dispatch(openModalAuth(false));
       toast.success("login with google success!");
     } catch (error) {

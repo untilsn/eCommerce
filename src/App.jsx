@@ -21,6 +21,7 @@ import { useDataFetcher } from "./hooks/useFetchData";
 import { useFetchCategory } from "./hooks/useFeatchCategory";
 import { useDataUser } from "./hooks/useDataUser";
 import DashboardUser from "./pages/manage/DashboardUser";
+import DashboardUpdateProduct from "./pages/manage/DashboardUpdateProduct";
 
 function App() {
   const { user } = useSelector((state) => state.auth);
@@ -58,6 +59,10 @@ function App() {
           <Route
             path="/manage/add-products"
             element={<AddProducts></AddProducts>}
+          ></Route>
+          <Route
+            path="/manage/products/update"
+            element={<DashboardUpdateProduct></DashboardUpdateProduct>}
           ></Route>
           <Route
             path="/manage/categories"
