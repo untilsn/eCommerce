@@ -34,6 +34,8 @@ const DashboardUpdateProduct = () => {
   const [url, setUrl] = useState("");
   const [urls, setUrls] = useState([]); // Ensure urls is an array
   const [comment, setComment] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectStatus, setSelectStatus] = useState("");
 
   const { control, setValue, getValues, handleSubmit, reset } = useForm({
     mode: "onChange",
@@ -49,8 +51,6 @@ const DashboardUpdateProduct = () => {
       reviews: [],
     },
   });
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [selectStatus, setSelectStatus] = useState("");
   const handleSelectCategory = (category) => {
     setSelectedCategory(category.toLowerCase());
   };
@@ -61,11 +61,9 @@ const DashboardUpdateProduct = () => {
     setValue,
     getValues
   );
-
   const handleDeleteImage = (url) => {
     handleRemoveImage(url);
   };
-
   const handleAddUrl = () => {
     if (urls.length > 5) return toast.error("Only 5 images or less");
     if (urls.some((item) => item === url)) {
@@ -77,13 +75,10 @@ const DashboardUpdateProduct = () => {
       setUrl("");
     }
   };
-
   const handleValueChange = (e) => {
     setUrl(e.target.value);
   };
-
   const combinedImages = [...image, ...urls];
-
   const handleAddProducts = async (values) => {
     if (!values || !user) return;
     if (!image.length && !urls.length) {
